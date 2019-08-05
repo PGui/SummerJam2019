@@ -12,6 +12,7 @@ public class Test : MonoBehaviour
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = new Vector3(cube.transform.position.x, 5 + i * 5 , cube.transform.position.z);
             cube.AddComponent<Rigidbody>();
+			//cou cou c'est Ludo
         }
     }
 
