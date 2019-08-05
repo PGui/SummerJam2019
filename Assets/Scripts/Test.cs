@@ -14,7 +14,7 @@ public class Test : MonoBehaviour
             cube.AddComponent<Rigidbody>();
         }
     }
-
+    //Bastien Comment submit test
     // Update is called once per frame
     void Update()
     {
