@@ -26,6 +26,11 @@ namespace LocalCoop {
                 player.transform.parent = GameObject.Find("PlayerManager").transform;
                 player.GetComponent<PlayerController>().playerControllerID = controllerID.ToString();
                 playerGameObject = player;
+                SceneManager.sceneLoaded += OnSceneLoaded;
+            }
+            void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+            {
+                TeleportAtSpawnPosition();
             }
             public void Activate()
             {
@@ -39,6 +44,14 @@ namespace LocalCoop {
             {
                 isActive = false;
                 isReady = false;
+            }
+            public void TeleportAtSpawnPosition()
+            {
+                GameObject spawner = GameObject.Find("Player"+controllerID.ToString()+"Spw");
+                if(spawner != null)
+                {
+                    playerGameObject.transform.position = spawner.transform.position;
+                }
             }
             public void ToggleGameplayControls(bool isEnabled)
             {
@@ -63,6 +76,10 @@ namespace LocalCoop {
                     isDPadPressed = true;
                     playerGameObject.GetComponent<FakeCharacterSelector>().OnDPadLeftPressed();
                 }
+            }
+            public void OnDisable()
+            {
+                SceneManager.sceneLoaded -= OnSceneLoaded;
             }
         }
         
@@ -150,14 +167,14 @@ namespace LocalCoop {
                 {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
                     LoadLevel(LevelNameToLoad);
-                    EnablePlayersGameplayControls();
+                    InitPlayersAfterLoadLevel();
                 }
             }
         }
         void LoadLevel(string sceneName) {
             SceneManager.LoadScene(sceneName);
         }
-        void EnablePlayersGameplayControls()
+        void InitPlayersAfterLoadLevel()
         {
             foreach (PlayerData player in playerListDyn)
             {
@@ -215,6 +232,13 @@ namespace LocalCoop {
                 }
             }
             return null;
+        }
+        void OnDisable()
+        {
+            foreach (PlayerData player in playerListDyn)
+            {
+                player.OnDisable();
+            }
         }
     }
 }
