@@ -174,23 +174,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
-  playerControllerID: 1
+  playerControllerID: 2
   gameplayControlsEnabled: 0
-  jumpMaxTime: 0.5
-  movementSpeed: 0
-  directionThreshold: 0.2
   groundSpeed: 15
   airSpeed: 3
   movementDamping: 0.1
-  dashSpeed: 100
-  momentum: 0
+  gravityMultiplier: 5
+  jumpMultiplier: -1
+  maxJumpHeight: 35
+  jumpFall: 0.3
   dashDistance: 20
   drag: {x: 2, y: 2, z: 2}
-  minJumpHeight: 1
-  maxJumpHeight: 35
-  jumpMultiplier: -1
-  gravityMultiplier: 5
-  jumpFall: 0.3
 --- !u!143 &6303306630583121377
 CharacterController:
   m_ObjectHideFlags: 0
