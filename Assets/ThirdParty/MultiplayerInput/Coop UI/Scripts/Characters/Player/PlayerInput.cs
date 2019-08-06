@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using XInputDotNetPure; // Required in C#
 
+public enum CharacterAbility {
+    Dash,
+    Rush
+}
+
 namespace LocalCoop {
     
     /// <summary>
@@ -13,12 +18,14 @@ namespace LocalCoop {
     /// </summary>
     public class PlayerInput : MonoBehaviour {
 
+        
+        [ReadOnly] public CharacterAbility ability;
+        [ReadOnly] public bool HasSelectedCharacted = false;
         public int controllerID;
         //Unitys input manager has some weird bugs with controllers reading other controller's inputs
         //no choice but to convert to xinput
         #region Xinput
         public bool Use_X_Input = false;    //use x input instead if unity's input manager
-
         PlayerIndex controllerID_X_Input;
         GamePadState state;
         GamePadState prevState;
@@ -93,7 +100,7 @@ namespace LocalCoop {
         }
 
         private void Awake() {
-
+            DontDestroyOnLoad(this.gameObject);
         }
 
         // Use this for initialization
@@ -158,6 +165,15 @@ namespace LocalCoop {
             }
 
             CheckLeftAxis();
+        }
+        /// <summary>
+        /// Consider this player has selected a character and store its abilityType
+        /// </summary>
+        public void SelectCharacter(SetCharacterAbility _ability)
+        { 
+            ability = _ability.abilityType;
+            HasSelectedCharacted = true;
+            print("VALIDATE ABILITY TYPE");
         }
 
         /// <summary>
