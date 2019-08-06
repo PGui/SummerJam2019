@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 6303306630583121376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4662344, y: 2.69285, z: -3.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1540231613}
   m_Father: {fileID: 0}
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
-  playerControllerID: 0
+  playerControllerID: 1
   gameplayControlsEnabled: 0
   jumpMaxTime: 0.5
   movementSpeed: 0

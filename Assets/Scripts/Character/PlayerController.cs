@@ -5,54 +5,51 @@ using LocalCoop;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Debug")]
     public bool debugMode = false;
     public string playerControllerID = "1";
     [ReadOnly] public bool gameplayControlsEnabled = false;
-   enum State {Idle, Running, Dashing, Jumping};
-    private State state = State.Idle;
+    // Player controller internals
     private CharacterController controller;
-    private Vector3 moveDirection;
-    public const float maxDashTime = 1.0f;
-    private float currentDashTime = maxDashTime;
-    private bool isInAir = false;
-    private bool canDash = true;
+    private Rigidbody rb;
 
-    private bool isJumping = false;
-
-    private float jumpTimeHeld = 0.0f;
-    public float jumpMaxTime = 1.0f;
-    
-    public float movementSpeed = 0;
-    public float directionThreshold = 0.2f;
+    [Header("Movement")]
     public float groundSpeed = 10;
     public float airSpeed = 5.0f;
     public float movementDamping = 0.1f;
-    public float dashSpeed = 100;
-    public bool momentum = false;
-    public float dashDistance = 10;
-    public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
-
-    public float minJumpHeight = 1.0f;
-    public float maxJumpHeight = 5.0f;
-    public float jumpMultiplier = -2.0f;
     public float gravityMultiplier = 2.0f;
 
-    private Vector3 velocity;
+    [Header("Jump")]
+    public float jumpMultiplier = -2.0f;
+    public float maxJumpHeight = 5.0f;
+    public float jumpFall = 0.15f;
 
+    [Header("Dash")]
+    public float dashDistance = 10;
+    public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
+    public const float maxDashTime = 1.0f;
+
+    // Internals movement
+    private Vector3 moveDirection;
+    private Vector3 velocity;
     private Vector3 previousMove;
     private Vector3 moveVelocity;
-
     private float lastTimeGrounded = 0.0f;
     private bool wasGrounded = false;
-    public float jumpFall = 0.15f;
+
+    // Internals jump
+    private bool isJumping = false;
     private bool isFalling = false;
-
     private Vector3 lastDirection;
-
-       // Start is called before the first frame update
+    
+    // Internals dash
+    private float currentDashTime = maxDashTime;
+ 
+    // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         moveDirection = Vector3.zero;
 
         StartCoroutine(CheckGrounded(controller));
@@ -153,46 +150,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-
-    void Land()
-    {
-        isInAir = false;
-    }
-
-    void Dash()
-    {
-        moveDirection = Vector3.zero;
-        state = State.Dashing;
-        currentDashTime = 0;    
-        Vector3 direction= new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetVerticalInputString()));
-        if (direction.sqrMagnitude < directionThreshold)  transform.LookAt(transform.position + direction);
-        moveDirection = transform.forward * dashDistance;
-        movementSpeed = dashSpeed;
-       
-     
-    }
-    void Run(float speed)
-    {
-        Vector3 direction = new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetHorizonalInputString()));
-		    
-        if (direction.sqrMagnitude > directionThreshold)
-        {
-            transform.LookAt(transform.position + direction);
-             moveDirection += transform.forward *  direction.magnitude;
-            movementSpeed = speed;
-        }
-    }
-
-    void EndDash()
-    {
-        if(!isInAir){
-            canDash = true;
-            movementSpeed = groundSpeed;
-            moveDirection = Vector3.zero;
-            state = State.Idle;
-        } 
-    }
     string GetHorizonalInputString()
     {
         return PlayerManager.K_HORIZONTAL+playerControllerID;
