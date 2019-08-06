@@ -638,41 +638,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121382, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: playerControllerID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121382, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: debugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121377, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: m_Height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121377, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121387, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: m_Height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121387, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121386, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f315d5761f27948af9bdf1cd830188, type: 3}
 --- !u!1 &1876624627
