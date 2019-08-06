@@ -24,7 +24,7 @@ namespace LocalCoop {
                 //Set the Player ID in PlayerController for input strings matching
                 GameObject player = Instantiate(PlayerPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject; 
                 player.transform.parent = GameObject.Find("PlayerManager").transform;
-                player.GetComponent<FakePlayerController>().playerControllerID = controllerID;
+                player.GetComponent<PlayerController>().playerControllerID = controllerID.ToString();
                 playerGameObject = player;
             }
             public void Activate()
@@ -42,7 +42,7 @@ namespace LocalCoop {
             }
             public void ToggleGameplayControls(bool isEnabled)
             {
-                playerGameObject.GetComponent<FakePlayerController>().gameplayControlsEnabled = isEnabled;
+                playerGameObject.GetComponent<PlayerController>().gameplayControlsEnabled = isEnabled;
             }
             public void ReleaseDPad()
             {
@@ -75,7 +75,7 @@ namespace LocalCoop {
         public GameObject CharacterSelectionUIPrefab;
         public GameObject PlayerPrefab;
         public List<PlayerData> playerListDyn;
-
+        public string LevelNameToLoad = "Level0";
 
         void Awake() {
             DontDestroyOnLoad(this.gameObject);
@@ -149,7 +149,7 @@ namespace LocalCoop {
                 if (scene.name == "CharacterSelection")
                 {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
-                    LoadLevel("Level0");
+                    LoadLevel(LevelNameToLoad);
                     EnablePlayersGameplayControls();
                 }
             }

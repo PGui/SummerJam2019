@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154bcc8a64f749f459764509047f7743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  debugMode: 0
   playerControllerID: 0
   gameplayControlsEnabled: 0
   jumpMaxTime: 0.5

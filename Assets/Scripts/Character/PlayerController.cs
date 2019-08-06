@@ -6,16 +6,12 @@ using LocalCoop;
 public class PlayerController : MonoBehaviour
 {
     public bool debugMode = false;
-    [ReadOnly] public int playerControllerID = 0;
+    public string playerControllerID = "1";
     [ReadOnly] public bool gameplayControlsEnabled = false;
    enum State {Idle, Running, Dashing, Jumping};
     private State state = State.Idle;
     private CharacterController controller;
     private Vector3 moveDirection;
-    private string horizontalInput = "Horizontal";
-    private string verticalInput = "Vertical";
-    private string dashInput = "Fire1";
-    private string jumpInput = "Jump";
     public const float maxDashTime = 1.0f;
     private float currentDashTime = maxDashTime;
     private bool isInAir = false;
@@ -61,16 +57,13 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(CheckGrounded(controller));
     }
-
     // Update is called once per frame
     void Update()
     {
         if(!debugMode && !gameplayControlsEnabled)
             return;
 
-        string input_horizontal = debugMode ? "Horizontal_P2": PlayerManager.K_HORIZONTAL+playerControllerID.ToString();
-        string input_vertical = debugMode ? "Vertical_P2": PlayerManager.K_VERTICAL+playerControllerID.ToString();
-        Vector3 move = new Vector3(Input.GetAxis(input_horizontal), 0, Input.GetAxis(input_vertical));
+        Vector3 move = new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetVerticalInputString()));
         if (move != Vector3.zero)
         {
             transform.forward = move;
@@ -80,8 +73,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 smoothedVector = Vector3.SmoothDamp(previousMove, moveVector, ref moveVelocity, movementDamping);
 
-        string input_dash = debugMode ? "Dash_P2": PlayerManager.K_DASH+playerControllerID.ToString();
-        if (Input.GetButtonDown(input_dash) && currentDashTime > maxDashTime)
+        if (Input.GetButtonDown(GetDashInputString()) && currentDashTime > maxDashTime)
         {
             currentDashTime = 0.0f;
             smoothedVector += Vector3.Scale(transform.forward,
@@ -99,8 +91,7 @@ public class PlayerController : MonoBehaviour
         if (controller.isGrounded && velocity.y < 0)
             velocity.y = 0f;
         
-        string input_jump = debugMode ? "Jump_P2": PlayerManager.K_JUMP+playerControllerID.ToString();
-        if (Input.GetButtonDown(input_jump) && (controller.isGrounded || 
+        if (Input.GetButtonDown(GetJumpInputString()) && (controller.isGrounded || 
             (isFalling && lastTimeGrounded < jumpFall)))
         {
             lastDirection = transform.forward;
@@ -174,7 +165,7 @@ public class PlayerController : MonoBehaviour
         moveDirection = Vector3.zero;
         state = State.Dashing;
         currentDashTime = 0;    
-        Vector3 direction= new Vector3(Input.GetAxis(horizontalInput), 0, Input.GetAxis(verticalInput));
+        Vector3 direction= new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetVerticalInputString()));
         if (direction.sqrMagnitude < directionThreshold)  transform.LookAt(transform.position + direction);
         moveDirection = transform.forward * dashDistance;
         movementSpeed = dashSpeed;
@@ -183,7 +174,7 @@ public class PlayerController : MonoBehaviour
     }
     void Run(float speed)
     {
-        Vector3 direction = new Vector3(Input.GetAxis(horizontalInput), 0, Input.GetAxis(verticalInput));
+        Vector3 direction = new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetHorizonalInputString()));
 		    
         if (direction.sqrMagnitude > directionThreshold)
         {
@@ -201,5 +192,21 @@ public class PlayerController : MonoBehaviour
             moveDirection = Vector3.zero;
             state = State.Idle;
         } 
+    }
+    string GetHorizonalInputString()
+    {
+        return PlayerManager.K_HORIZONTAL+playerControllerID;
+    }
+    string GetVerticalInputString()
+    {
+        return PlayerManager.K_VERTICAL+playerControllerID;
+    }
+    string GetJumpInputString()
+    {
+        return PlayerManager.K_JUMP+playerControllerID;
+    }
+    string GetDashInputString()
+    {
+        return PlayerManager.K_DASH+playerControllerID;
     }
 }
