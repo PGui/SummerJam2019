@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
+using LocalCoop;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool debugMode = false;
+    [ReadOnly] public int playerControllerID = 0;
+    [ReadOnly] public bool gameplayControlsEnabled = false;
    enum State {Idle, Running, Dashing, Jumping};
     private State state = State.Idle;
     private CharacterController controller;
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public float jumpFall = 0.15f;
     private bool isFalling = false;
 
+    private Vector3 lastDirection;
+
        // Start is called before the first frame update
     void Start()
     {
@@ -60,28 +65,32 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonUp("Jump"))
-        {
-            jumpTimeHeld = 0.0f;
-        }
+        if(!debugMode && !gameplayControlsEnabled)
+            return;
 
-        if (Input.GetButton("Jump"))
-        {
-            jumpTimeHeld += Time.deltaTime;
-            jumpTimeHeld = Mathf.Min(jumpTimeHeld, jumpMaxTime);
-        } 
-
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        string input_horizontal = debugMode ? "Horizontal_P2": PlayerManager.K_HORIZONTAL+playerControllerID.ToString();
+        string input_vertical = debugMode ? "Vertical_P2": PlayerManager.K_VERTICAL+playerControllerID.ToString();
+        Vector3 move = new Vector3(Input.GetAxis(input_horizontal), 0, Input.GetAxis(input_vertical));
         if (move != Vector3.zero)
         {
             transform.forward = move;
         }
 
-        Vector3 moveVector = move * (controller.isGrounded ? groundSpeed : airSpeed);
+        Vector3 moveVector = move * GetSpeedToApply(move);
 
         Vector3 smoothedVector = Vector3.SmoothDamp(previousMove, moveVector, ref moveVelocity, movementDamping);
 
-        controller.Move(smoothedVector* Time.deltaTime);
+        string input_dash = debugMode ? "Dash_P2": PlayerManager.K_DASH+playerControllerID.ToString();
+        if (Input.GetButtonDown(input_dash) && currentDashTime > maxDashTime)
+        {
+            currentDashTime = 0.0f;
+            smoothedVector += Vector3.Scale(transform.forward,
+                                            dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
+                                                                        0, 
+                                                                    (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+        }
+
+        controller.Move(smoothedVector * Time.deltaTime);
 
         previousMove = smoothedVector;
         
@@ -90,59 +99,33 @@ public class PlayerController : MonoBehaviour
         if (controller.isGrounded && velocity.y < 0)
             velocity.y = 0f;
         
-        if (Input.GetButtonDown("Jump") && (controller.isGrounded || 
+        string input_jump = debugMode ? "Jump_P2": PlayerManager.K_JUMP+playerControllerID.ToString();
+        if (Input.GetButtonDown(input_jump) && (controller.isGrounded || 
             (isFalling && lastTimeGrounded < jumpFall)))
         {
+            lastDirection = transform.forward;
             isJumping = true;
              velocity.y = 0f;
              velocity.y += Mathf.Sqrt(maxJumpHeight * jumpMultiplier * Physics.gravity.y);
         }
 
-        if (false/* Input.GetButtonDown("Dash")*/)
+        currentDashTime += Time.deltaTime;
+    }
+
+    float GetSpeedToApply(Vector3 axisDirection)
+    {
+        float Speed = groundSpeed;
+
+        if (!controller.isGrounded)
         {
-            Debug.Log("Dash");
-            velocity += Vector3.Scale(transform.forward, 
-                                       dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
-                                                                  0, 
-                                                                  (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+            axisDirection.Normalize();
+            lastDirection.Normalize();
+            float delta = (Vector3.Dot(axisDirection, lastDirection) + 1.0f) / 2.0f;
+
+            Speed = Mathf.Lerp(airSpeed, groundSpeed, delta);
         }
 
-
-        // velocity.x /= 1 + drag.x * Time.deltaTime;
-        // velocity.y /= 1 + drag.y * Time.deltaTime;
-        // velocity.z /= 1 + drag.z * Time.deltaTime;
-        
-        // if(Input.GetButtonUp(dashInput) && canDash)
-        // {
-        //    Dash(); 
-        // } 
-
-        // if( state == State.Dashing)
-        // {
-        //     if(currentDashTime < maxDashTime)
-        //     {
-        //        currentDashTime += dashStoppingSpeed;
-        //     }
-        //     else
-        //     {
-        //         EndDash();
-        //     }
-        // }
-        // else if(state == State.Running || state == State.Idle)
-        // {
-        //     Run(groundSpeed); 
-        //     if(moveDirection.magnitude > directionThreshold)
-        //     {
-        //         state = State.Running;
-        //      } 
-        //     else
-        //     {
-        //         state = State.Idle;
-        //         movementSpeed = 0;
-        //     } 
-        // } 
-       
-        // controller.Move(moveDirection * movementSpeed * Time.deltaTime );
+        return Speed;
     }
 
     IEnumerator CheckGrounded(CharacterController controller)
