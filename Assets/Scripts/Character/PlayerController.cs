@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour
     private float currentDashTime = maxDashTime;
     private bool isInAir = false;
     private bool canDash = true;
-   
+
+    private bool isJumping = false;
+
+    private float jumpTimeHeld = 0.0f;
+    public float jumpMaxTime = 1.0f;
     
     public float movementSpeed = 0;
     public float directionThreshold = 0.2f;
@@ -27,25 +31,51 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 100;
     public bool momentum = false;
     public float dashDistance = 10;
-    public float dashStoppingSpeed = 0.1f;
-    public float jumpHeight = 10.0f;
+    public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
+
+    public float minJumpHeight = 1.0f;
+    public float maxJumpHeight = 5.0f;
+    public float jumpMultiplier = -2.0f;
+    public float gravityMultiplier = 2.0f;
 
     private Vector3 velocity;
 
     private Vector3 previousMove;
     private Vector3 moveVelocity;
 
+    private float lastTimeGrounded = 0.0f;
+    private bool wasGrounded = false;
+    public float jumpFall = 0.15f;
+    private bool isFalling = false;
+
        // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         moveDirection = Vector3.zero;
+
+        StartCoroutine(CheckGrounded(controller));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonUp("Jump"))
+        {
+            jumpTimeHeld = 0.0f;
+        }
+
+        if (Input.GetButton("Jump"))
+        {
+            jumpTimeHeld += Time.deltaTime;
+            jumpTimeHeld = Mathf.Min(jumpTimeHeld, jumpMaxTime);
+        } 
+
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (move != Vector3.zero)
+        {
+            transform.forward = move;
+        }
 
         Vector3 moveVector = move * (controller.isGrounded ? groundSpeed : airSpeed);
 
@@ -54,25 +84,37 @@ public class PlayerController : MonoBehaviour
         controller.Move(smoothedVector* Time.deltaTime);
 
         previousMove = smoothedVector;
-        if (move != Vector3.zero)
-        {
-            transform.forward = move;
-        }
-
-        velocity.y += Physics.gravity.y * Time.deltaTime;
+        
+        velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
             velocity.y = 0f;
-
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
-            velocity.y += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
         
+        if (Input.GetButtonDown("Jump") && (controller.isGrounded || 
+            (isFalling && lastTimeGrounded < jumpFall)))
+        {
+            isJumping = true;
+             velocity.y = 0f;
+             velocity.y += Mathf.Sqrt(maxJumpHeight * jumpMultiplier * Physics.gravity.y);
+        }
+
+        if (false/* Input.GetButtonDown("Dash")*/)
+        {
+            Debug.Log("Dash");
+            velocity += Vector3.Scale(transform.forward, 
+                                       dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
+                                                                  0, 
+                                                                  (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+        }
+
+
+        // velocity.x /= 1 + drag.x * Time.deltaTime;
+        // velocity.y /= 1 + drag.y * Time.deltaTime;
+        // velocity.z /= 1 + drag.z * Time.deltaTime;
         
         // if(Input.GetButtonUp(dashInput) && canDash)
         // {
-          
         //    Dash(); 
-          
         // } 
 
         // if( state == State.Dashing)
@@ -102,6 +144,42 @@ public class PlayerController : MonoBehaviour
        
         // controller.Move(moveDirection * movementSpeed * Time.deltaTime );
     }
+
+    IEnumerator CheckGrounded(CharacterController controller)
+    {
+        while(true)
+        {
+            if (!controller.isGrounded)
+            {
+                lastTimeGrounded += Time.deltaTime;
+            }
+            else
+            {
+                lastTimeGrounded = 0.0f;
+            }
+
+            if (controller.isGrounded && !wasGrounded)
+            {
+                if (isJumping)
+                    isJumping = false;
+            }
+
+            if (!isJumping && !controller.isGrounded)
+            {
+                isFalling = true;
+            }
+            else if (isFalling && controller.isGrounded)
+            {
+                isFalling = false;
+            }
+
+            wasGrounded = controller.isGrounded;
+            
+            yield return null;
+        }
+    }
+
+    
 
     void Land()
     {

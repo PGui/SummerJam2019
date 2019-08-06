@@ -94,16 +94,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154bcc8a64f749f459764509047f7743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpMaxTime: 0.5
   movementSpeed: 0
   directionThreshold: 0.2
-  groundSpeed: 10
+  groundSpeed: 15
   airSpeed: 5
   movementDamping: 0.1
   dashSpeed: 100
   momentum: 0
   dashDistance: 10
-  dashStoppingSpeed: 0.1
-  jumpHeight: 5
+  drag: {x: 2, y: 2, z: 2}
+  minJumpHeight: 1
+  maxJumpHeight: 35
+  jumpMultiplier: -1
+  gravityMultiplier: 5
+  jumpFall: 0.3
 --- !u!143 &6303306630583121377
 CharacterController:
   m_ObjectHideFlags: 0
