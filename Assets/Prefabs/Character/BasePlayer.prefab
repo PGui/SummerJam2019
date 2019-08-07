@@ -5369,8 +5369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bffadceedb28974ab00d753c3789177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedDivider: 2
-  energyCountdown: 20
+  speedMultiplier: 2
+  energyCountdown: 0
 --- !u!1 &6473270998763512722
 GameObject:
   m_ObjectHideFlags: 0
