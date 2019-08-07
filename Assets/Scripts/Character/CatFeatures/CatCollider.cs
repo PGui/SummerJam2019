@@ -29,7 +29,6 @@ public class CatCollider : MonoBehaviour
         eCatState otherState = otherEntity.GetComponent<CatState>().currentState;        
         if (otherState == eCatState.CHASER && otherEntity.GetComponent<PlayerController>().canCapture)
         {
-            this.gameObject.GetComponentInParent<CatState>().currentState = eCatState.CHASER;
             DelegateChaser(otherEntity);
         }
     }

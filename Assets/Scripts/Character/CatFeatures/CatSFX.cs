@@ -40,7 +40,7 @@ public class CatSFX : MonoBehaviour
     {
         if (!walkAudioSource.isPlaying)
         {
-            print(Random.Range(0, walkSounds.Length));
+            //print(Random.Range(0, walkSounds.Length));
             walkAudioSource.PlayOneShot(walkSounds[Random.Range(0, walkSounds.Length)]);
         }
     }

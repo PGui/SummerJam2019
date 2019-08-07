@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public enum eCatState
 {
     CHASER,
-    CHASED
+    CHASED,
+    NONE
 
 }
 
@@ -92,18 +93,6 @@ namespace LocalCoop {
                         {
                             player.Activate();
                         }
-                        else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) == 1)
-                        {
-                            player.SelectNextCharacter();
-                        }
-                        else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) == -1)
-                        {
-                            player.SelectPreviousCharacter();
-                        }
-                        else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != -1 && Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != 1)
-                        {
-                            player.ReleaseDPad();
-                        }
                     }
                     else if(player.isActive)
                     {
@@ -114,6 +103,21 @@ namespace LocalCoop {
                         else if(Input.GetButtonDown(K_DASH+i.ToString()))
                         {
                             player.Deactivate();
+                        }
+                        if(!player.isReady)
+                        {
+                            if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) == 1)
+                            {
+                                player.SelectNextCharacter();
+                            }
+                            else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) == -1)
+                            {
+                                player.SelectPreviousCharacter();
+                            }
+                            else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != -1 && Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != 1)
+                            {
+                                player.ReleaseDPad();
+                            }
                         }
                     }
                 }

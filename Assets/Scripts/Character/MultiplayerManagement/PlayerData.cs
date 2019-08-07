@@ -17,36 +17,54 @@ public class PlayerData
     {
         //Spawn and store player prefab in GameObject
         //Set the Player ID in PlayerController for input strings matching
-        GameObject player = GameObject.Instantiate(PlayerPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject; 
+        GameObject player = GameObject.Instantiate(PlayerPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject; 
         player.transform.parent = GameObject.Find("PlayerManager").transform;
         player.GetComponent<PlayerController>().playerControllerID = controllerID.ToString();
         playerGameObject = player;
+        TeleportAtMenuPosition();
         SceneManager.sceneLoaded += OnSceneLoaded;
         player.GetComponentInChildren<CatCollider>().DelegateChaser += IncreaseScore;
-
-        if(controllerID == 1)
-        {
-            playerGameObject.GetComponent<CatState>().currentState = eCatState.CHASER;
-        }
+        playerGameObject.GetComponent<CatState>().currentState = eCatState.NONE;
+        playerGameObject.GetComponent<CharacterSelector>().HideAllMeshes();
     }
-    void IncreaseScore(GameObject touchedChasedCat)
+    void IncreaseScore(GameObject touchedChaserCat)
     {
         GameObject playerManager = GameObject.Find("PlayerManager");
         if(playerManager != null)
         {
-            playerManager.GetComponent<PlayerManager>().IncreaseScore(int.Parse(touchedChasedCat.GetComponent<PlayerController>().playerControllerID));
+            playerManager.GetComponent<PlayerManager>().IncreaseScore(int.Parse(touchedChaserCat.GetComponent<PlayerController>().playerControllerID));
         }
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (!PlayerManager.IsMenuScene(scene))
         {
+            if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
+            {
+                playerGameObject.SetActive(false);
+            }
             TeleportAtSpawnPosition();
+        }
+        else
+        {
+            if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
+            {
+                playerGameObject.SetActive(true);
+            }
+            TeleportAtMenuPosition();
         }
     }
     public void Activate()
     {
         isActive = true;
+        if(controllerID == 1)
+        {
+            playerGameObject.GetComponent<CatState>().currentState = eCatState.CHASER;
+        }
+        else
+        {
+            playerGameObject.GetComponent<CatState>().currentState = eCatState.CHASED;
+        }
     }
     public void Ready()
     {
@@ -56,6 +74,18 @@ public class PlayerData
     {
         isActive = false;
         isReady = false;
+    }
+    public void TeleportAtMenuPosition()
+    {
+        float xSpawnPosition = -11+controllerID*2.5f; //-11 is left offset and 2.5 is the space between each cat
+        Vector3 cameraPos = Camera.main.transform.position;
+        Vector3 menuSpawnPos = new Vector3 (xSpawnPosition,0,0);
+        cameraPos.y -= 10;
+        Vector3 lookAtDir = cameraPos - menuSpawnPos;
+        Quaternion menuSpawnRotation = Quaternion.LookRotation(lookAtDir, Vector3.up);
+
+        playerGameObject.transform.position = menuSpawnPos;
+        playerGameObject.transform.rotation = menuSpawnRotation;
     }
     public void TeleportAtSpawnPosition()
     {
@@ -78,7 +108,7 @@ public class PlayerData
         if(!isDPadPressed)
         {
             isDPadPressed = true;
-            playerGameObject.GetComponent<FakeCharacterSelector>().OnDPadRightPressed();
+            playerGameObject.GetComponent<CharacterSelector>().OnDPadRightPressed();
         }
     }
     public void SelectPreviousCharacter()
@@ -86,7 +116,7 @@ public class PlayerData
         if(!isDPadPressed)
         {
             isDPadPressed = true;
-            playerGameObject.GetComponent<FakeCharacterSelector>().OnDPadLeftPressed();
+            playerGameObject.GetComponent<CharacterSelector>().OnDPadLeftPressed();
         }
     }
     public void Reset()
@@ -94,10 +124,8 @@ public class PlayerData
         isActive = false; 
         isReady = false;
         ToggleGameplayControls(false);
-        if(controllerID != 1)
-        {
-            playerGameObject.GetComponent<CatState>().currentState = eCatState.CHASED;
-        }
+        playerGameObject.GetComponent<CharacterSelector>().HideAllMeshes();
+        playerGameObject.GetComponent<CatState>().currentState = eCatState.NONE;
     }
     public void OnDisable()
     {  

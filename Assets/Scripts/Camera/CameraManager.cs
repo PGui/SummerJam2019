@@ -39,6 +39,10 @@ public class CameraManager : MonoBehaviour
         // Compute the target position
         foreach (GameObject go in Players)
         {
+            if(go.GetComponent<CatState>().currentState == eCatState.NONE)
+            {
+                continue;
+            }
             min.x = Mathf.Min(min.x, go.transform.position.x);
             min.y = Mathf.Min(min.y, go.transform.position.y);
             min.z = Mathf.Min(min.z, go.transform.position.z);
