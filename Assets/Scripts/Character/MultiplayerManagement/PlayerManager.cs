@@ -2,87 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+public enum eCatState
+{
+    CHASER,
+    CHASED
 
+}
 
 namespace LocalCoop {
     /// <summary>
     /// A manager that can be used to add players without having pre-assigned controlled ID's to the input
     /// </summary>
     public class PlayerManager : MonoBehaviour {
-
-        [System.Serializable]
-        public class PlayerData
-        {    
-            public int controllerID = 0;
-            public bool isActive = false; //Used to sapwn/unspawn characters
-            public bool isReady = false; //Used to set player as "ready" (when all are ready, Load Level scene)
-            private bool isDPadPressed = false; //Handle the release of DPad
-            public GameObject playerGameObject;
-            public void Spawn(GameObject PlayerPrefab)
-            {
-                //Spawn and store player prefab in GameObject
-                //Set the Player ID in PlayerController for input strings matching
-                GameObject player = Instantiate(PlayerPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject; 
-                player.transform.parent = GameObject.Find("PlayerManager").transform;
-                player.GetComponent<PlayerController>().playerControllerID = controllerID.ToString();
-                playerGameObject = player;
-                SceneManager.sceneLoaded += OnSceneLoaded;
-            }
-            void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-            {
-                TeleportAtSpawnPosition();
-            }
-            public void Activate()
-            {
-                isActive = true;
-            }
-            public void Ready()
-            {
-                isReady = true;
-            }
-            public void Deactivate()
-            {
-                isActive = false;
-                isReady = false;
-            }
-            public void TeleportAtSpawnPosition()
-            {
-                GameObject spawner = GameObject.Find("Player"+controllerID.ToString()+"Spw");
-                if(spawner != null)
-                {
-                    playerGameObject.transform.position = spawner.transform.position;
-                }
-            }
-            public void ToggleGameplayControls(bool isEnabled)
-            {
-                playerGameObject.GetComponent<PlayerController>().gameplayControlsEnabled = isEnabled;
-            }
-            public void ReleaseDPad()
-            {
-                isDPadPressed = false;
-            }
-            public void SelectNextCharacter()
-            {
-                if(!isDPadPressed)
-                {
-                    isDPadPressed = true;
-                    playerGameObject.GetComponent<FakeCharacterSelector>().OnDPadRightPressed();
-                }
-            }
-            public void SelectPreviousCharacter()
-            {
-                if(!isDPadPressed)
-                {
-                    isDPadPressed = true;
-                    playerGameObject.GetComponent<FakeCharacterSelector>().OnDPadLeftPressed();
-                }
-            }
-            public void OnDisable()
-            {
-                SceneManager.sceneLoaded -= OnSceneLoaded;
-            }
-        }
-        
         public static int K_NB_PLAYER_MAX = 8;
         public static string K_HORIZONTAL = "Horizontal_P";
         public static string K_HORIZONTAL_DPAD = "Horizontal_DPad_P";
@@ -94,11 +25,33 @@ namespace LocalCoop {
         public List<PlayerData> playerListDyn;
         public string LevelNameToLoad = "Level0";
 
+        public static PlayerManager singleton = null;
+
+        public static bool IsMenuScene(Scene scene)
+        {
+            return scene.name == "CharacterSelection";
+        }
         void Awake() {
+            //Check if instance already exists
+            if (singleton == null) {
+                //if not, set instance to this
+                singleton = this;
+            }
+
+            //If instance already exists and it's not this:
+            else if (singleton != this) {
+                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+                Destroy(gameObject);
+            }
             DontDestroyOnLoad(this.gameObject);
         }
 
         void Start() {
+            CreatePlayers();
+        }
+
+        void CreatePlayers()
+        {
             //Fill PlayerListDyn
             for (int i = 1; i < K_NB_PLAYER_MAX+1; ++i) {
                 PlayerData playerData = new PlayerData();
@@ -110,11 +63,21 @@ namespace LocalCoop {
         
         void Update() {
             Scene scene = SceneManager.GetActiveScene();
-            if (scene.name == "CharacterSelection")
+            if (IsMenuScene(scene))
             {
                 UpdateCharacterSelectionInputsHandling();
             }
-            
+            else
+            {
+                if(AllCatsAreChasers())
+                {
+                    print("END OF GAME");
+                    //DestroyPlayers();
+                    //DestroyImmediate(this.gameObject);
+                    ResetPlayers();
+                    LoadLevel("CharacterSelection");
+                }
+            }
         }
 
         void UpdateCharacterSelectionInputsHandling()
@@ -163,7 +126,7 @@ namespace LocalCoop {
             if(GetControllerAmount() == GetPlayerReadyCount())
             {
                 Scene scene = SceneManager.GetActiveScene();
-                if (scene.name == "CharacterSelection")
+                if (IsMenuScene(scene))
                 {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
                     LoadLevel(LevelNameToLoad);
@@ -233,12 +196,40 @@ namespace LocalCoop {
             }
             return null;
         }
-        void OnDisable()
+        bool AllCatsAreChasers()
+        {
+            int chaserCatsCount = 0;
+            foreach (PlayerData player in playerListDyn)
+            {
+                if(player.playerGameObject.GetComponent<CatState>().currentState == eCatState.CHASER)
+                {
+                    chaserCatsCount++;
+                }
+            }
+            return chaserCatsCount == GetPlayerReadyCount();
+        }
+        public void IncreaseScore(int playerControllerID)
+        {
+            PlayerData player = FindPlayer(playerControllerID);
+            if(player != null)
+            {
+                player.score++;
+            }
+        }        
+        void ResetPlayers()
+        {
+            foreach (PlayerData player in playerListDyn)
+            {
+                player.Reset();
+            }
+        }
+        void DestroyPlayers()
         {
             foreach (PlayerData player in playerListDyn)
             {
                 player.OnDisable();
             }
+            playerListDyn.Clear();
         }
     }
 }

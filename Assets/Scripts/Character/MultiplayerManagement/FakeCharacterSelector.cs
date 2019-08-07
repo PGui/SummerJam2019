@@ -27,11 +27,11 @@ public class FakeCharacterSelector : MonoBehaviour
     public void OnDPadLeftPressed()
     {
         currentSelectedCharacterID--;
-        print(string.Format("Player {0} changed character (LEFT) // this function does nothing for now", this.gameObject.GetComponent<FakePlayerController>().playerControllerID));
+        print(string.Format("Player {0} changed character (LEFT) // this function does nothing for now", this.gameObject.GetComponent<PlayerController>().playerControllerID));
     }
     public void OnDPadRightPressed()
     {
         currentSelectedCharacterID++;
-        print(string.Format("Player {0} changed character (RIGHT) // this function does nothing for now", this.gameObject.GetComponent<FakePlayerController>().playerControllerID));        
+        print(string.Format("Player {0} changed character (RIGHT) // this function does nothing for now", this.gameObject.GetComponent<PlayerController>().playerControllerID));        
     }
 }
