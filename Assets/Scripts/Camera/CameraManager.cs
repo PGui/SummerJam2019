@@ -66,7 +66,7 @@ public class CameraManager : MonoBehaviour
 
             currentFov = Mathf.Lerp(minFov, maxFov, ratio);
 
-            Debug.Log(currentFov);
+            // Debug.Log(currentFov);
         }
 
         this.GetComponent<Camera>().fieldOfView =  Mathf.SmoothStep(this.GetComponent<Camera>().fieldOfView, currentFov, 0.2f);
