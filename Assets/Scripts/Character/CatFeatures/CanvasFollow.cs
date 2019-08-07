@@ -13,6 +13,7 @@ public class CanvasFollow : MonoBehaviour
     public GameObject header;
     private GameObject player;
     private CatEnergy catEnergy;
+    public Vector3 offset = new Vector3(0,20,0);
     
   
       // Start is called before the first frame update
@@ -32,9 +33,15 @@ public class CanvasFollow : MonoBehaviour
     void Update()
     {
         Vector3 uiPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-        header.transform.position = uiPosition;
+        header.transform.position = uiPosition + offset;
 
-        if(catEnergy != null)
-            countdown.text = catEnergy.energyCountdown.ToString();
+
+        if(catEnergy != null){
+
+
+            float count = Mathf.Round( catEnergy.energyCountdown * 100f) / 100f;
+            countdown.text = count.ToString();
+        }
+            
     }
 }
