@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TouchCollider
   - Pickup
+  - CameraShake
   layers:
   - Default
   - TransparentFX
