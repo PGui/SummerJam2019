@@ -83,11 +83,7 @@ public class CharacterSelector : MonoBehaviour
         {
             currentColorVariantID = coloredMeshes.Length-1;
         }
-        if(currentColorVariantID < coloredMeshes.Length)
-        {
-            chaserMesh = coloredMeshes[currentColorVariantID].chaserMesh;
-            chasedMesh = coloredMeshes[currentColorVariantID].chasedMesh;
-        }
+        SetCurrentColorMeshes(currentColorVariantID);
     }
     public void OnDPadUpPressed()
     {
@@ -97,11 +93,7 @@ public class CharacterSelector : MonoBehaviour
         {
             currentColorVariantID = 0;
         }
-        if(currentColorVariantID < coloredMeshes.Length)
-        {
-            chaserMesh = coloredMeshes[currentColorVariantID].chaserMesh;
-            chasedMesh = coloredMeshes[currentColorVariantID].chasedMesh;
-        }
+        SetCurrentColorMeshes(currentColorVariantID);
     }
     public void OnDPadRightPressed()
     {
@@ -119,5 +111,18 @@ public class CharacterSelector : MonoBehaviour
     public Color GetCatColor()
     {
         return coloredMeshes[currentColorVariantID].pairColor;
+    }
+    public void InitCharacterWithID(int controllerID)
+    {
+        currentColorVariantID = controllerID;
+        SetCurrentColorMeshes(currentColorVariantID);
+    }
+    private void SetCurrentColorMeshes(int colorID)
+    {
+        if(colorID < coloredMeshes.Length)
+        {
+            chaserMesh = coloredMeshes[colorID].chaserMesh;
+            chasedMesh = coloredMeshes[colorID].chasedMesh;
+        }
     }
 }
