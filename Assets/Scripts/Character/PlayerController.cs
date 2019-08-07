@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
     public const float maxDashTime = 1.0f;
 
+    [Header("Capture")]
+    public const float maxCaptureTime = 0.5f;
+    public bool canCapture = false;
+
     // Internals movement
     private Vector3 moveDirection;
     private Vector3 velocity;
@@ -72,11 +76,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown(GetDashInputString()) && currentDashTime > maxDashTime)
         {
+
             currentDashTime = 0.0f;
             smoothedVector += Vector3.Scale(transform.forward,
                                             dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
                                                                         0, 
                                                                     (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+            canCapture = true;
         }
 
         controller.Move(smoothedVector * Time.deltaTime);
@@ -98,6 +104,13 @@ public class PlayerController : MonoBehaviour
         }
 
         currentDashTime += Time.deltaTime;
+
+        if(currentDashTime >= maxCaptureTime)
+            canCapture = false;
+        
+
+           
+
     }
 
     float GetSpeedToApply(Vector3 axisDirection)
