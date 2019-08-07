@@ -28,6 +28,13 @@ public class CatVFX : MonoBehaviour
         if (!walkVFX.isPlaying)
         {
             walkVFX.Play();
+            // if(GetComponent<CatState>().currentState == eCatState.CHASER) //If we want the black cats to have black smoke
+            // {
+            //     var main = walkVFX.main;
+            //     main.startColor = Color.black;
+            // }
+            var main = walkVFX.main;
+            main.startColor = GetComponent<CharacterSelector>().GetCatColor();
         }
         
     }

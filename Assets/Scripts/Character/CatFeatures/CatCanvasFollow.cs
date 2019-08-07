@@ -37,7 +37,7 @@ public class CatCanvasFollow : MonoBehaviour
     {
         if (!PlayerManager.IsMenuScene(scene))
         {
-            if(player.GetComponent<CatState>().currentState == eCatState.CHASED)
+            if(player.GetComponent<CatState>().currentState == eCatState.CHASER)
             {
                 score.gameObject.SetActive(true);
             }
@@ -65,6 +65,10 @@ public class CatCanvasFollow : MonoBehaviour
 
             float count = Mathf.Round( catEnergy.energyCountdown * 100f) / 100f;
             countdown.text = count.ToString();
+        }
+        if(score != null)
+        {
+
         }
             
     }

@@ -247,7 +247,7 @@ namespace LocalCoop {
                 player.score++;
                 player.playerGameObject.GetComponentInChildren<CatCanvasFollow>().score.text = player.score.ToString();
             }
-        }        
+        }
         void ResetPlayers()
         {
             foreach (PlayerData player in playerListDyn)
