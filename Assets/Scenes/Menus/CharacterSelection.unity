@@ -5581,6 +5581,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 6303306630583121376, guid: 10f315d5761f27948af9bdf1cd830188,
     type: 3}
   playerListDyn: []
+  LevelNameToLoad: Test_01
 --- !u!1 &1830603612
 GameObject:
   m_ObjectHideFlags: 0

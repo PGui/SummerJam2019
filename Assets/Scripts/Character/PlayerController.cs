@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using LocalCoop;
 
+public delegate void OnDashDelegate();
+public delegate void OnJumpDelegate();
+public delegate void OnMoveDelegate();
+public delegate void OnStopDelegate();
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Debug")]
@@ -18,16 +23,31 @@ public class PlayerController : MonoBehaviour
     public float airSpeed = 5.0f;
     public float movementDamping = 0.1f;
     public float gravityMultiplier = 2.0f;
+    public OnMoveDelegate OnMove;
+    public OnStopDelegate OnStop;
 
     [Header("Jump")]
     public float jumpMultiplier = -2.0f;
     public float maxJumpHeight = 5.0f;
     public float jumpFall = 0.15f;
+    public OnJumpDelegate OnJump;
 
     [Header("Dash")]
     public float dashDistance = 10;
     public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
+    public OnDashDelegate OnDash;
     public const float maxDashTime = 1.0f;
+    [Header("Out of Arena Bump")]
+    
+    public bool isMagnet = false;
+    public Vector3 magnetPosition = new Vector3(3.0f,20.0f,-8.0f);
+    private Vector3 magnetDirection = new Vector3(0.0f,0.0f,0.0f);
+    public float magnetFactor = 3.0f;
+    public float outOfArenaJumpMultiplier = 5.0f;
+
+    [Header("Capture")]
+    public const float maxCaptureTime = 0.5f;
+    public bool canCapture = false;
 
     // Internals movement
     private Vector3 moveDirection;
@@ -44,6 +64,8 @@ public class PlayerController : MonoBehaviour
     
     // Internals dash
     private float currentDashTime = maxDashTime;
+
+
  
     // Start is called before the first frame update
     void Start()
@@ -63,7 +85,12 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetVerticalInputString()));
         if (move != Vector3.zero)
         {
+            OnMove();
             transform.forward = move;
+        }
+        else
+        {
+            OnStop();
         }
 
         Vector3 moveVector = move * GetSpeedToApply(move);
@@ -72,11 +99,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown(GetDashInputString()) && currentDashTime > maxDashTime)
         {
+            OnDash();
             currentDashTime = 0.0f;
             smoothedVector += Vector3.Scale(transform.forward,
                                             dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
                                                                         0, 
                                                                     (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+            canCapture = true;
+        }
+
+        if(isMagnet)
+        {
+            smoothedVector += magnetDirection*magnetFactor;
+            if(controller.isGrounded)
+            {
+                isMagnet = false;
+            }
         }
 
         controller.Move(smoothedVector * Time.deltaTime);
@@ -91,6 +129,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(GetJumpInputString()) && (controller.isGrounded || 
             (isFalling && lastTimeGrounded < jumpFall)))
         {
+            OnJump();
             lastDirection = transform.forward;
             isJumping = true;
              velocity.y = 0f;
@@ -98,6 +137,13 @@ public class PlayerController : MonoBehaviour
         }
 
         currentDashTime += Time.deltaTime;
+
+        if(currentDashTime >= maxCaptureTime)
+            canCapture = false;
+        
+
+           
+
     }
 
     float GetSpeedToApply(Vector3 axisDirection)
@@ -150,6 +196,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TriggerOutOfArenaBump()
+    {
+            isMagnet = true;
+            lastDirection = transform.forward;
+            isJumping = true;
+            velocity.y = 0f;
+            velocity.y += Mathf.Sqrt(outOfArenaJumpMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
+            currentDashTime = 0.0f;
+            magnetDirection = magnetPosition - this.gameObject.transform.position;
+            magnetDirection.Normalize();
+    }
     string GetHorizonalInputString()
     {
         return PlayerManager.K_HORIZONTAL+playerControllerID;
