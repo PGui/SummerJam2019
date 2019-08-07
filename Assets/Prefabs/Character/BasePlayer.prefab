@@ -6338,16 +6338,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_cat1E_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 91934bce47a04ae4189f1ae535b5dda6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6403,6 +6393,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_cat1E_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91934bce47a04ae4189f1ae535b5dda6, type: 3}
 --- !u!1 &4025948889206905035 stripped
@@ -6424,16 +6424,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatH_mesh 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: fbef74e0cf9be2145a11610c35bac17e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6489,6 +6479,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatH_mesh 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbef74e0cf9be2145a11610c35bac17e, type: 3}
 --- !u!4 &1064851485604275192 stripped
@@ -6510,16 +6510,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_cat1C_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 28c8c4762535d0c47b4406033b958902,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6575,6 +6565,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_cat1C_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c8c4762535d0c47b4406033b958902, type: 3}
 --- !u!4 &1556373688920754405 stripped
@@ -6596,16 +6596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatC_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f6019f53e2d2a2745b8c378146470e51,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6661,6 +6651,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatC_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6019f53e2d2a2745b8c378146470e51, type: 3}
 --- !u!4 &1300842505563754541 stripped
@@ -6682,16 +6682,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatG_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 69ce3e13470a307479e3bd9bf028a62f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6745,6 +6735,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 69ce3e13470a307479e3bd9bf028a62f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatG_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6948,7 +6948,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 57ad4bf853e98b7468823631e88a0daa,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 57ad4bf853e98b7468823631e88a0daa,
         type: 3}

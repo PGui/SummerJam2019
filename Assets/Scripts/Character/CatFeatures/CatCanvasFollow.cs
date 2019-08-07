@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using LocalCoop;
 
 public class CatCanvasFollow : MonoBehaviour
 {
@@ -23,20 +25,33 @@ public class CatCanvasFollow : MonoBehaviour
 
         playerName.text = playersName + " " + player.GetComponent<PlayerController>().playerControllerID;
         
+        player.GetComponentInChildren<CatCollider>().DelegateChaser += OnBecameChaser;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         catEnergy = player.GetComponent<CatEnergy>();
         //playerName = header.transform.Find("Name").GetComponent<Text>();
        //countdown = header.transform.Find("Countdown").GetComponent<Text>();
-         //score = header.transform.Find("Score").GetComponent<Text>();
-        if(player.GetComponent<CatState>().currentState == eCatState.CHASED){
-             score.gameObject.SetActive(true);
+         //score = header.transform.Find("Score").GetComponent<Text>();           
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!PlayerManager.IsMenuScene(scene))
+        {
+            if(player.GetComponent<CatState>().currentState == eCatState.CHASED)
+            {
+                score.gameObject.SetActive(true);
+            }
         }
         else
         {
-            //player.GetComponent<CatCollider>() 
+            score.gameObject.SetActive(false);
         }
-           
     }
 
+    void OnBecameChaser(GameObject touchingChaser)
+    {
+        score.gameObject.SetActive(true);
+    }
     // Update is called once per frame
     void Update()
     {
