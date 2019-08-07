@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public float outOfArenaJumpMultiplier = 5.0f;
 
     [Header("Capture")]
-    public const float maxCaptureTime = 0.5f;
+    public float maxCaptureTime = 2f;
     public bool canCapture = false;
 
     // Internals movement
@@ -196,16 +196,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TriggerOutOfArenaBump()
+    public void TriggerOutOfArenaBump(bool forceDirectionToArenaCenter)
     {
-            isMagnet = true;
             lastDirection = transform.forward;
             isJumping = true;
             velocity.y = 0f;
             velocity.y += Mathf.Sqrt(outOfArenaJumpMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
-            currentDashTime = 0.0f;
-            magnetDirection = magnetPosition - this.gameObject.transform.position;
-            magnetDirection.Normalize();
+            if(forceDirectionToArenaCenter)
+            {
+                isMagnet = true;
+                magnetDirection = magnetPosition - this.gameObject.transform.position;
+                magnetDirection.Normalize();
+            }
     }
     string GetHorizonalInputString()
     {

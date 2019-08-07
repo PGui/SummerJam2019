@@ -39,6 +39,7 @@ public class PlayerData
     {
         if (!PlayerManager.IsMenuScene(scene))
         {
+            ToggleReadyImage(false);
             if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
             {
                 playerGameObject.SetActive(false);
@@ -68,10 +69,12 @@ public class PlayerData
     }
     public void Ready()
     {
+        ToggleReadyImage(true);
         isReady = true;
     }
     public void Deactivate()
     {
+        ToggleReadyImage(false);
         isActive = false;
         isReady = false;
     }
@@ -98,6 +101,14 @@ public class PlayerData
     public void ToggleGameplayControls(bool isEnabled)
     {
         playerGameObject.GetComponent<PlayerController>().gameplayControlsEnabled = isEnabled;
+    }
+    public void ToggleReadyImage(bool isEnabled)
+    {
+        GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
+        if(readyImage != null)
+        {
+            readyImage.SetActive(isEnabled);
+        }
     }
     public void ReleaseDPad()
     {

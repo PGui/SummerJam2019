@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 3643595039934104866}
   m_Layer: 0
   m_Name: Shakeable
-  m_TagString: Untagged
+  m_TagString: CameraShake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumTranslationShake: {x: 1, y: 1, z: 1}
-  maximumAngularShake: {x: 15, y: 15, z: 15}
-  frequency: 25
+  maximumAngularShake: {x: 30, y: 30, z: 30}
+  frequency: 20
   traumaExponent: 1
   recoverySpeed: 1
 --- !u!1 &3643595040176801687
