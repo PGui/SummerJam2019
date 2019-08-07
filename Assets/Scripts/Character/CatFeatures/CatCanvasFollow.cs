@@ -22,11 +22,19 @@ public class CatCanvasFollow : MonoBehaviour
         player = this.transform.parent.gameObject;
 
         playerName.text = playersName + " " + player.GetComponent<PlayerController>().playerControllerID;
+        
         catEnergy = player.GetComponent<CatEnergy>();
         //playerName = header.transform.Find("Name").GetComponent<Text>();
        //countdown = header.transform.Find("Countdown").GetComponent<Text>();
          //score = header.transform.Find("Score").GetComponent<Text>();
-
+        if(player.GetComponent<CatState>().currentState == eCatState.CHASED){
+             score.gameObject.SetActive(true);
+        }
+        else
+        {
+            //player.GetComponent<CatCollider>() 
+        }
+           
     }
 
     // Update is called once per frame
@@ -35,6 +43,7 @@ public class CatCanvasFollow : MonoBehaviour
         Vector3 uiPosition = Camera.main.WorldToScreenPoint(player.transform.position);
         header.transform.position = uiPosition + offset;
 
+        playerName.color = player.GetComponent<CharacterSelector>().GetCatColor();
 
         if(catEnergy != null){
 

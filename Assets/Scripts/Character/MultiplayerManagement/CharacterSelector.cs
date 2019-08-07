@@ -33,7 +33,7 @@ public class CharacterSelector : MonoBehaviour
     void Update()
     {
         CatState catState = this.GetComponent<CatState>();
-        if(catState != null)
+        if(catState != null && chaserMesh != null && chasedMesh != null)
         {
             if(catState.currentState == eCatState.CHASER)
             {
@@ -56,8 +56,11 @@ public class CharacterSelector : MonoBehaviour
     
     public void HideAllMeshes()
     {
-        chaserMesh.SetActive(false);
-        chasedMesh.SetActive(false);
+        if(chaserMesh != null && chasedMesh != null)
+        {
+            chaserMesh.SetActive(false);
+            chasedMesh.SetActive(false);
+        }
     }
     public void OnDPadLeftPressed()
     {
