@@ -13,7 +13,6 @@ public class CatEnergy : MonoBehaviour
     private float baseDashDistance;
     PlayerController playerController;
 
-    public Text countDown;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +43,7 @@ public class CatEnergy : MonoBehaviour
                 
             }
         }
+        
         
     }
 

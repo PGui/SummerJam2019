@@ -4991,7 +4991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8866455c76b8474cbc42b63add15827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: {fileID: 0}
+  playerName: {fileID: 4823300085284267612}
+  countdown: {fileID: 4834443281132696902}
+  player: {fileID: 6303306630583121376}
 --- !u!1 &6303306630583121376
 GameObject:
   m_ObjectHideFlags: 0
