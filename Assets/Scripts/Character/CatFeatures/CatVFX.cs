@@ -6,6 +6,7 @@ public class CatVFX : MonoBehaviour
 {
     private PlayerController playerController;
     public ParticleSystem walkVFX;
+    public ParticleSystem fightVFX;
     
     // Start is called before the first frame update
     void Start()
@@ -13,6 +14,7 @@ public class CatVFX : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerController.OnMove += OnMove;
         playerController.OnStop += OnStop;
+        this.GetComponentInChildren<CatCollider>().DelegateChaser += StartFightVFX;
     }
 
     // Update is called once per frame
@@ -35,6 +37,14 @@ public class CatVFX : MonoBehaviour
         if (walkVFX.isPlaying)
         {
             walkVFX.Stop();
+        }
+    }
+
+    void StartFightVFX(GameObject touchingChaser)
+    {
+        if (fightVFX != null && !fightVFX.isPlaying)
+        {
+            fightVFX.Play();
         }
     }
 }
