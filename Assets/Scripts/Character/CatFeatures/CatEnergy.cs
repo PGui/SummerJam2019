@@ -6,8 +6,8 @@ using UnityEngine;
 public class CatEnergy : MonoBehaviour
 {
 
-    public float speedDivider = 2f;
-    public float energyCountdown = 10f;
+    public float speedMultiplier = 2f;
+    public float energyCountdown = 0.0f;
     private float baseGroundSpeed;
     private float baseAirSpeed;
     private float baseDashDistance;
@@ -37,9 +37,9 @@ public class CatEnergy : MonoBehaviour
             energyCountdown -= Time.deltaTime;
             if(energyCountdown <= 0){
                 energyCountdown = 0;
-                playerController.groundSpeed /= speedDivider;
-                playerController.airSpeed /= speedDivider;
-                playerController.dashDistance /= speedDivider;
+                playerController.groundSpeed /= speedMultiplier;
+                playerController.airSpeed /= speedMultiplier;
+                playerController.dashDistance /= speedMultiplier;
                 
             }
         }
@@ -53,9 +53,9 @@ public class CatEnergy : MonoBehaviour
         {
             if(energyCountdown == 0 && time > 0)
             {
-                playerController.groundSpeed *= speedDivider;
-                playerController.airSpeed *= speedDivider;
-                playerController.dashDistance *= speedDivider;
+                playerController.groundSpeed *= speedMultiplier;
+                playerController.airSpeed *= speedMultiplier;
+                playerController.dashDistance *= speedMultiplier;
             }
 
             energyCountdown += time;
