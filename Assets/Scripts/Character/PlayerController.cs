@@ -196,16 +196,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TriggerOutOfArenaBump()
+    public void TriggerOutOfArenaBump(bool forceDirectionToArenaCenter)
     {
-            isMagnet = true;
             lastDirection = transform.forward;
             isJumping = true;
             velocity.y = 0f;
             velocity.y += Mathf.Sqrt(outOfArenaJumpMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
-            currentDashTime = 0.0f;
-            magnetDirection = magnetPosition - this.gameObject.transform.position;
-            magnetDirection.Normalize();
+            if(forceDirectionToArenaCenter)
+            {
+                isMagnet = true;
+                magnetDirection = magnetPosition - this.gameObject.transform.position;
+                magnetDirection.Normalize();
+            }
     }
     string GetHorizonalInputString()
     {

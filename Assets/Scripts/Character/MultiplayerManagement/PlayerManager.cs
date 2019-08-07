@@ -25,6 +25,8 @@ namespace LocalCoop {
         public GameObject PlayerPrefab;
         public List<PlayerData> playerListDyn;
         public string LevelNameToLoad = "Level0";
+        public GameObject UICharacterSelection;
+        public GameObject UIVictoryScreen;
 
         public static PlayerManager singleton = null;
 
@@ -72,11 +74,18 @@ namespace LocalCoop {
             {
                 if(AllCatsAreChasers())
                 {
-                    print("END OF GAME");
-                    //DestroyPlayers();
-                    //DestroyImmediate(this.gameObject);
-                    ResetPlayers();
-                    LoadLevel("CharacterSelection");
+                    if(!UIVictoryScreen.activeInHierarchy)
+                    {
+                        print("END OF GAME");
+                        UIVictoryScreen.SetActive(true);
+                    }
+                    if(Input.GetButtonDown("StartEndGame"))
+                    {
+                        ResetPlayers();
+                        UIVictoryScreen.SetActive(false);
+                        UICharacterSelection.SetActive(true);
+                        LoadLevel("CharacterSelection");
+                    }
                 }
             }
         }
@@ -133,6 +142,7 @@ namespace LocalCoop {
                 if (IsMenuScene(scene))
                 {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
+                    UICharacterSelection.SetActive(false);
                     LoadLevel(LevelNameToLoad);
                     InitPlayersAfterLoadLevel();
                 }
