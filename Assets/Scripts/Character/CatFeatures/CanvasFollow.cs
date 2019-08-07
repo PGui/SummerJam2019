@@ -6,9 +6,10 @@ using UnityEngine;
 public class CanvasFollow : MonoBehaviour
 {
 
-    private Text playerName;
-    private Text countdown;
-    private Text score;
+    public Text playerName;
+    public Text countdown;
+    public Text score;
+    public string playersName = "Cat";
     public GameObject header;
     private GameObject player;
     private CatEnergy catEnergy;
@@ -21,6 +22,7 @@ public class CanvasFollow : MonoBehaviour
         gameCamera = Camera.main;
         player = this.transform.parent.gameObject;
 
+        playerName.text = playersName + " " + player.GetComponent<PlayerController>().playerControllerID;
         catEnergy = player.GetComponent<CatEnergy>();
         //playerName = header.transform.Find("Name").GetComponent<Text>();
        //countdown = header.transform.Find("Countdown").GetComponent<Text>();

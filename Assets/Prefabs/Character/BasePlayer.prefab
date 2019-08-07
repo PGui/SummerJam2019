@@ -4989,6 +4989,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8866455c76b8474cbc42b63add15827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 4823300085284267612}
+  countdown: {fileID: 4834443281132696902}
+  score: {fileID: 4578886240367432591}
+  playersName: Cat
   header: {fileID: 3444136532680778191}
 --- !u!1 &3444136532680778191
 GameObject:
@@ -5365,7 +5369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedDivider: 2
-  energyCountdown: 10
+  energyCountdown: 20
 --- !u!1 &6473270998763512722
 GameObject:
   m_ObjectHideFlags: 0
@@ -5444,7 +5448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '25
+  m_Text: '0
 
 '
 --- !u!1 &6774180986089687675
