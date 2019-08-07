@@ -235,7 +235,7 @@ namespace LocalCoop {
             if(player != null)
             {
                 player.score++;
-                player.playerGameObject.GetComponentInChildren<CanvasFollow>().score.text = player.score.ToString();
+                player.playerGameObject.GetComponentInChildren<CatCanvasFollow>().score.text = player.score.ToString();
             }
         }        
         void ResetPlayers()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class CanvasFollow : MonoBehaviour
+public class CatCanvasFollow : MonoBehaviour
 {
 
     public Text playerName;
