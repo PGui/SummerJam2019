@@ -26,7 +26,7 @@ public class PlayerData
         player.GetComponentInChildren<CatCollider>().DelegateChaser += IncreaseScore;
         playerGameObject.GetComponent<CatState>().currentState = eCatState.NONE;
         playerGameObject.GetComponent<CharacterSelector>().HideAllMeshes();
-        playerGameObject.GetComponent<CharacterSelector>().currentColorVariantID = controllerID;
+        playerGameObject.GetComponent<CharacterSelector>().InitCharacterWithID(controllerID-1);
     }
     void IncreaseScore(GameObject touchedChaserCat)
     {
