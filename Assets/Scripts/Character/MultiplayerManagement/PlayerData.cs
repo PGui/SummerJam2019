@@ -72,11 +72,14 @@ public class PlayerData
         ToggleReadyImage(true);
         isReady = true;
     }
-    public void Deactivate()
+    public void DeReady()
     {
         ToggleReadyImage(false);
-        isActive = false;
         isReady = false;
+    }
+    public void Deactivate()
+    {
+        Reset();
     }
     public void TeleportAtMenuPosition()
     {

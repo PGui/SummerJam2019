@@ -111,7 +111,14 @@ namespace LocalCoop {
                         }
                         else if(Input.GetButtonDown(K_DASH+i.ToString()))
                         {
-                            player.Deactivate();
+                            if(player.isReady)
+                            {
+                                player.DeReady();
+                            }
+                            else
+                            {
+                                player.Deactivate();
+                            }
                         }
                         if(!player.isReady)
                         {
