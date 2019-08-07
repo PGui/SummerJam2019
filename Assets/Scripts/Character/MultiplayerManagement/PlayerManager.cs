@@ -18,6 +18,7 @@ namespace LocalCoop {
         public static int K_NB_PLAYER_MAX = 8;
         public static string K_HORIZONTAL = "Horizontal_P";
         public static string K_HORIZONTAL_DPAD = "Horizontal_DPad_P";
+        public static string K_VERTICAL_DPAD = "Vertical_DPad_P";
         public static string K_VERTICAL = "Vertical_P";
         public static string K_JUMP = "Jump_P";
         public static string K_DASH = "Dash_P";        
@@ -130,7 +131,16 @@ namespace LocalCoop {
                             {
                                 player.SelectPreviousCharacter();
                             }
-                            else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != -1 && Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != 1)
+                            else if(Input.GetAxis(K_VERTICAL_DPAD+i.ToString()) == 1)
+                            {
+                                player.SelectNextCharacterColor();
+                            }
+                            else if(Input.GetAxis(K_VERTICAL_DPAD+i.ToString()) == -1)
+                            {
+                                player.SelectPreviousCharacterColor();
+                            }
+                            else if(Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != -1 && Input.GetAxis(K_HORIZONTAL_DPAD+i.ToString()) != 1 
+                                    && Input.GetAxis(K_VERTICAL_DPAD+i.ToString()) != -1 && Input.GetAxis(K_VERTICAL_DPAD+i.ToString()) != 1)
                             {
                                 player.ReleaseDPad();
                             }

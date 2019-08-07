@@ -26,6 +26,7 @@ public class PlayerData
         player.GetComponentInChildren<CatCollider>().DelegateChaser += IncreaseScore;
         playerGameObject.GetComponent<CatState>().currentState = eCatState.NONE;
         playerGameObject.GetComponent<CharacterSelector>().HideAllMeshes();
+        playerGameObject.GetComponent<CharacterSelector>().currentColorVariantID = controllerID;
     }
     void IncreaseScore(GameObject touchedChaserCat)
     {
@@ -131,6 +132,22 @@ public class PlayerData
         {
             isDPadPressed = true;
             playerGameObject.GetComponent<CharacterSelector>().OnDPadLeftPressed();
+        }
+    }
+    public void SelectNextCharacterColor()
+    {
+        if(!isDPadPressed)
+        {
+            isDPadPressed = true;
+            playerGameObject.GetComponent<CharacterSelector>().OnDPadUpPressed();
+        }
+    }
+    public void SelectPreviousCharacterColor()
+    {
+        if(!isDPadPressed)
+        {
+            isDPadPressed = true;
+            playerGameObject.GetComponent<CharacterSelector>().OnDPadDownPressed();
         }
     }
     public void Reset()

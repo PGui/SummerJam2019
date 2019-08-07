@@ -11,9 +11,18 @@ using UnityEngine;
 //
 public class CharacterSelector : MonoBehaviour
 {
+    [System.Serializable]
+    public class ColoredMeshPair
+    {
+        public GameObject chaserMesh; 
+        public GameObject chasedMesh;
+        public Color pairColor;
+    }
     [ReadOnly] int currentSelectedCharacterID = 0;
     public GameObject chaserMesh; 
     public GameObject chasedMesh; 
+    public ColoredMeshPair[] coloredMeshes; 
+    public int currentColorVariantID = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +72,34 @@ public class CharacterSelector : MonoBehaviour
             this.gameObject.GetComponent<CatState>().currentState = eCatState.CHASER;
         }
     }
+    public void OnDPadDownPressed()
+    {
+        HideAllMeshes();
+        currentColorVariantID--;
+        if(currentColorVariantID < 0)
+        {
+            currentColorVariantID = coloredMeshes.Length-1;
+        }
+        if(currentColorVariantID < coloredMeshes.Length)
+        {
+            chaserMesh = coloredMeshes[currentColorVariantID].chaserMesh;
+            chasedMesh = coloredMeshes[currentColorVariantID].chasedMesh;
+        }
+    }
+    public void OnDPadUpPressed()
+    {
+        HideAllMeshes();
+        currentColorVariantID++;
+        if(currentColorVariantID == coloredMeshes.Length)
+        {
+            currentColorVariantID = 0;
+        }
+        if(currentColorVariantID < coloredMeshes.Length)
+        {
+            chaserMesh = coloredMeshes[currentColorVariantID].chaserMesh;
+            chasedMesh = coloredMeshes[currentColorVariantID].chasedMesh;
+        }
+    }
     public void OnDPadRightPressed()
     {
         currentSelectedCharacterID++;
@@ -75,5 +112,9 @@ public class CharacterSelector : MonoBehaviour
         {
             this.gameObject.GetComponent<CatState>().currentState = eCatState.CHASER;
         }
+    }
+    public Color GetCatColor()
+    {
+        return coloredMeshes[currentColorVariantID].pairColor;
     }
 }
