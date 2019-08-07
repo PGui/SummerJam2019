@@ -6,17 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ThirdParty/MultiplayerInput/Coop UI/Coop UI navigation.unity
-    guid: 794a9f8b8e69c594aaf05d00d2de78be
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level0.unity
-    guid: cd2f5490863221b4bb3b6be3f3cd67b3
-  - enabled: 1
     path: Assets/Scenes/Menus/CharacterSelection.unity
     guid: fb0073f28c5def04e9986a634c1427b7
-  - enabled: 1
-    path: Assets/Scenes/3C.unity
-    guid: b47e0e2c189fbeb4dbf0f42be95e017d
   - enabled: 1
     path: Assets/Scenes/LevelDesign/Test_01.unity
     guid: a990561b1ec2118479152f2d7137e31e

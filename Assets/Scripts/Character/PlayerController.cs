@@ -28,6 +28,13 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 10;
     public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
     public const float maxDashTime = 1.0f;
+    [Header("Out of Arena Bump")]
+    
+    public bool isMagnet = false;
+    public Vector3 magnetPosition = new Vector3(3.0f,20.0f,-8.0f);
+    private Vector3 magnetDirection = new Vector3(0.0f,0.0f,0.0f);
+    public float magnetFactor = 3.0f;
+    public float outOfArenaJumpMultiplier = 5.0f;
 
     // Internals movement
     private Vector3 moveDirection;
@@ -77,6 +84,15 @@ public class PlayerController : MonoBehaviour
                                             dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drag.x + 1)) / -Time.deltaTime), 
                                                                         0, 
                                                                     (Mathf.Log(1f / (Time.deltaTime * drag.z + 1)) / -Time.deltaTime)));
+        }
+
+        if(isMagnet)
+        {
+            smoothedVector += magnetDirection*magnetFactor;
+            if(controller.isGrounded)
+            {
+                isMagnet = false;
+            }
         }
 
         controller.Move(smoothedVector * Time.deltaTime);
@@ -150,6 +166,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TriggerOutOfArenaBump()
+    {
+            isMagnet = true;
+            lastDirection = transform.forward;
+            isJumping = true;
+            velocity.y = 0f;
+            velocity.y += Mathf.Sqrt(outOfArenaJumpMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
+            currentDashTime = 0.0f;
+            magnetDirection = magnetPosition - this.gameObject.transform.position;
+            magnetDirection.Normalize();
+    }
     string GetHorizonalInputString()
     {
         return PlayerManager.K_HORIZONTAL+playerControllerID;
