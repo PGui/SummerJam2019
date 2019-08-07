@@ -6,6 +6,7 @@ using LocalCoop;
 public delegate void OnDashDelegate();
 public delegate void OnJumpDelegate();
 public delegate void OnMoveDelegate();
+public delegate void OnStopDelegate();
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float movementDamping = 0.1f;
     public float gravityMultiplier = 2.0f;
     public OnMoveDelegate OnMove;
+    public OnStopDelegate OnStop;
 
     [Header("Jump")]
     public float jumpMultiplier = -2.0f;
@@ -85,6 +87,10 @@ public class PlayerController : MonoBehaviour
         {
             OnMove();
             transform.forward = move;
+        }
+        else
+        {
+            OnStop();
         }
 
         Vector3 moveVector = move * GetSpeedToApply(move);
