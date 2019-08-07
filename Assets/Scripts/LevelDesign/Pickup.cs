@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    AudioSource audioSource;
+    public AudioClip[] pickUpClips;
    
     private static int activePickupCount = 0;
     private static List<Pickup> pickups = new List<Pickup>();
@@ -26,7 +28,7 @@ public class Pickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -64,6 +66,8 @@ public class Pickup : MonoBehaviour
         }
 
         reactivationTimer = 0;
+
+        audioSource.PlayOneShot(pickUpClips[Random.Range(0, pickUpClips.Length)]);
     }
     private void OnTriggerEnter(Collider other)
     {
