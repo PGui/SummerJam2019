@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public float outOfArenaJumpMultiplier = 5.0f;
 
     [Header("Capture")]
-    public const float maxCaptureTime = 0.5f;
+    public float maxCaptureTime = 2f;
     public bool canCapture = false;
 
     // Internals movement

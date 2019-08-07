@@ -104,11 +104,7 @@ public class PlayerData
     }
     public void ToggleReadyImage(bool isEnabled)
     {
-        GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Ready").gameObject;
-        if(readyImage == null)
-        {
-            readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
-        }
+        GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
         if(readyImage != null)
         {
             readyImage.SetActive(isEnabled);
