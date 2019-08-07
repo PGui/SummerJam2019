@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
+  playerControllerIDInt: 1
   playerControllerID: 1
   gameplayControlsEnabled: 0
   groundSpeed: 15
