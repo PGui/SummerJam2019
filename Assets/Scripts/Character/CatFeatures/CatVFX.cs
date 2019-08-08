@@ -17,9 +17,6 @@ public class CatVFX : MonoBehaviour
         playerController.OnMove += OnMove;
         playerController.OnStop += OnStop;
         this.GetComponentInChildren<CatCollider>().DelegateChaser += StartFightVFX;
-
-        GameObject shakeGameobject = GameObject.FindGameObjectWithTag("CameraShake");
-        cameraShake = shakeGameobject?.GetComponent<ShakeableTransform>();
     }
 
     // Update is called once per frame
@@ -54,6 +51,8 @@ public class CatVFX : MonoBehaviour
 
     void StartFightVFX(GameObject touchingChaser)
     {
+        GameObject shakeGameobject = GameObject.FindGameObjectWithTag("CameraShake");
+        cameraShake = shakeGameobject?.GetComponent<ShakeableTransform>();
         if (fightVFX != null && !fightVFX.isPlaying)
         {
             fightVFX.Play();

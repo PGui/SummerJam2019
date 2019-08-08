@@ -170,4 +170,8 @@ public class PlayerData
         GameObject.DestroyImmediate(playerGameObject);
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    public Color GetCatColor()
+    {  
+        return playerGameObject.GetComponent<CharacterSelector>().GetCatColor();
+    }
 }

@@ -113,6 +113,32 @@ namespace LocalCoop {
                     if(!UIVictoryScreen.activeInHierarchy)
                     {
                         print("END OF GAME");
+                        GameObject fireworkContainer = GameObject.Find("FireworkFXsWinner");
+                        if(fireworkContainer != null)
+                        {
+                            PlayerData winner = FindWinner();
+                            Color fireworkColor = Color.red;
+                            if(winner != null)
+                            {
+                                fireworkColor = winner.GetCatColor();
+                            }
+                            ParticleSystem[] fxArray = fireworkContainer.GetComponentsInChildren<ParticleSystem>();
+                            foreach(ParticleSystem sys in fxArray)
+                            {
+                                var main = sys.main;
+                                main.startColor = fireworkColor;
+                                sys.Play();
+                            }
+                        }
+                        GameObject fireworkContainerColored = GameObject.Find("FireworkFXsColored");
+                        if(fireworkContainerColored != null)
+                        {
+                            ParticleSystem[] fxArray = fireworkContainerColored.GetComponentsInChildren<ParticleSystem>();
+                            foreach(ParticleSystem sys in fxArray)
+                            {
+                                sys.Play();
+                            }
+                        }
                         UIVictoryScreen.SetActive(true);
                     }
                     if(Input.GetButtonDown("StartEndGame"))
@@ -300,6 +326,20 @@ namespace LocalCoop {
                 player.score++;
                 player.playerGameObject.GetComponentInChildren<CatCanvasFollow>().score.text = player.score.ToString();
             }
+        }
+        public PlayerData FindWinner()
+        {
+            int bestScore = 0;
+            PlayerData playerWinner = null;
+            foreach (PlayerData player in playerListDyn)
+            {
+                if(player.score >= bestScore)
+                {
+                    bestScore = player.score;
+                    playerWinner=player;
+                }
+            }
+            return playerWinner;
         }
         void ResetPlayers()
         {
