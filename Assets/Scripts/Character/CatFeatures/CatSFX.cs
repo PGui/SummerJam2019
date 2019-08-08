@@ -6,8 +6,11 @@ public class CatSFX : MonoBehaviour
 {
     AudioSource audioSource;
     AudioSource walkAudioSource;
+    AudioSource angryAudioSource;
 
     public AudioClip[] walkSounds;
+
+    public AudioClip[] angrySounds;
 
     public AudioClip jumpSound;
     public AudioClip dashSound;
@@ -24,6 +27,9 @@ public class CatSFX : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         walkAudioSource = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+        angryAudioSource = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+
+        this.GetComponentInChildren<CatCollider>().DelegateChaser += OnCatCatched;
     }
 
     void OnDash()
@@ -42,6 +48,15 @@ public class CatSFX : MonoBehaviour
         {
             //print(Random.Range(0, walkSounds.Length));
             walkAudioSource.PlayOneShot(walkSounds[Random.Range(0, walkSounds.Length)]);
+        }
+    }
+
+    void OnCatCatched(GameObject cat)
+    {
+        if (!angryAudioSource.isPlaying && angrySounds.Length > 0)
+        {
+            //print(Random.Range(0, walkSounds.Length));
+            angryAudioSource.PlayOneShot(angrySounds[Random.Range(0, angrySounds.Length)]);
         }
     }
 
