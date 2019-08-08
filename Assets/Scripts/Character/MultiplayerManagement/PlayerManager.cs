@@ -39,6 +39,12 @@ namespace LocalCoop {
         public static PlayerManager singleton = null;
       
 
+        // Sounds
+        AudioSource audioSource;
+        public AudioClip[] StartSounds;
+
+       
+
         public static bool IsMenuScene(Scene scene)
         {
             return scene.name == "CharacterSelection";
@@ -59,6 +65,7 @@ namespace LocalCoop {
         }
 
         void Start() {
+            CreateAudioSource();
             CreatePlayers();
         }
 
@@ -308,5 +315,17 @@ namespace LocalCoop {
             }
             playerListDyn.Clear();
         }
+
+        void CreateAudioSource()
+        {
+            audioSource = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+        }
+
+        void PlayReadySound(int index)
+        {
+            audioSource.PlayOneShot(StartSounds[index]);
+        }
     }
+
+    
 }
