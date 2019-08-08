@@ -825,7 +825,6 @@ GameObject:
   - component: {fileID: 1764934333}
   - component: {fileID: 1764934332}
   - component: {fileID: 1764934331}
-  - component: {fileID: 1764934335}
   - component: {fileID: 1764934334}
   - component: {fileID: 1764934336}
   m_Layer: 5
@@ -834,7 +833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1764934331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,18 +911,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &1764934335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764934330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c716fa229da66f946891b230af7b6cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1764934336
 Animator:
   serializedVersion: 3
@@ -998,7 +985,6 @@ MonoBehaviour:
   startCountdown: 4
   startMessage: GO !
   StartSounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: c54e71e61e932ad4291c820ad4184f03, type: 3}
+  - {fileID: 8300000, guid: 54a2580da47fbc44d8cd237ad56f895c, type: 3}
+  - {fileID: 8300000, guid: df86da32c2ab62b478427ee5d195ab14, type: 3}
