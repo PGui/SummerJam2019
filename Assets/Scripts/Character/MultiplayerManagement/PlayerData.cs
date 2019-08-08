@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using LocalCoop;
 
@@ -111,9 +112,11 @@ public class PlayerData
     public void ToggleReadyImage(bool isEnabled)
     {
         GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
+        
         if(readyImage != null)
         {
             readyImage.SetActive(isEnabled);
+            readyImage.GetComponent<Image>().color = GetCatColor();
         }
     }
     public void ReleaseDPad()
