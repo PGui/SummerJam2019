@@ -34,6 +34,7 @@ namespace LocalCoop {
         [Header("CountDown")]
         public float startCountdown = 3;
         public string startMessage = "GO !";
+        private float currentCountdown = 0;
         private int displayedCountdown = 0;
 
         public static PlayerManager singleton = null;
@@ -89,11 +90,11 @@ namespace LocalCoop {
             else
             {
 
-                if(startCountdown > 0)
+                if(currentCountdown > 0)
                 {
-                    startCountdown -= Time.deltaTime;
+                    currentCountdown -= Time.deltaTime;
                     int previousCountdown = displayedCountdown;
-                    displayedCountdown = Mathf.RoundToInt(startCountdown);
+                    displayedCountdown = Mathf.RoundToInt(currentCountdown);
 
                     if(displayedCountdown < previousCountdown)
                     {
@@ -104,7 +105,7 @@ namespace LocalCoop {
                         else UpdateCountDown(displayedCountdown.ToString(), 0);//index for 3 2 1 sounds
                     }
                     
-                    if(startCountdown <= 0){
+                    if(currentCountdown <= 0){
                        UICountDown.SetActive(false);
                     }
                 }
@@ -222,7 +223,7 @@ namespace LocalCoop {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
                     UICharacterSelection.SetActive(false);
                     LoadLevel(LevelNameToLoad);
-                              
+                            
                     //InitPlayersAfterLoadLevel();
                 }
             }
@@ -235,8 +236,11 @@ namespace LocalCoop {
         
         void OnLevelLoaded(Scene scene, LoadSceneMode mode)
         {
-            if(!IsMenuScene(scene))
-                UICountDown.SetActive(true);  
+            if(!IsMenuScene(scene)){
+                UICountDown.SetActive(true); 
+                currentCountdown = startCountdown;
+            }
+               
         }   
         void InitPlayersAfterLoadLevel()
         {

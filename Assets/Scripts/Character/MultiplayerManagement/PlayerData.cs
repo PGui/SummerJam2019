@@ -41,7 +41,7 @@ public class PlayerData
     {
         if (!PlayerManager.IsMenuScene(scene))
         {
-            ToggleReadyImage(false);
+          //  ToggleReadyImage(false);
             if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
             {
                 playerGameObject.SetActive(false);
