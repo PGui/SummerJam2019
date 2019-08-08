@@ -285,7 +285,7 @@ namespace LocalCoop {
             }
             return readyCount;
         }
-        bool IsActivePlayerID(int playerIDToCheck) {
+        public bool IsActivePlayerID(int playerIDToCheck) {
             foreach (PlayerData player in playerListDyn)
             {
                 if(player.controllerID == playerIDToCheck)

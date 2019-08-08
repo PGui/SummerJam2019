@@ -157,8 +157,11 @@ public class PlayerController : MonoBehaviour
 
         if(currentDashTime >= maxCaptureTime)
         {
-            canCapture = false;
-            OnDashStop();
+            if(canCapture)
+            {
+                canCapture = false;
+                OnDashStop();
+            }
         }
         
 

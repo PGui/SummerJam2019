@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -5252816984213320552, guid: 57ad4bf853e98b7468823631e88a0daa,
+  m_Motion: {fileID: 1827226128182048838, guid: 6cabaef042ecf3646b654ffbb97a1222,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -102,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -2993534804863918692, guid: 57ad4bf853e98b7468823631e88a0daa,
+  m_Motion: {fileID: -2993534804863918692, guid: 6cabaef042ecf3646b654ffbb97a1222,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -143,7 +143,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CatAnimator
+  m_Name: BlackCatAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsMoving
@@ -151,19 +151,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDashing
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -225,7 +225,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -139364887524879693, guid: 57ad4bf853e98b7468823631e88a0daa,
+  m_Motion: {fileID: -139364887524879693, guid: 6cabaef042ecf3646b654ffbb97a1222,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -254,7 +254,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -851199388697429409, guid: 57ad4bf853e98b7468823631e88a0daa,
+  m_Motion: {fileID: -851199388697429409, guid: 6cabaef042ecf3646b654ffbb97a1222,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

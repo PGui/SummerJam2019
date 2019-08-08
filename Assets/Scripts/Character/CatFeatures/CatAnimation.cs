@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LocalCoop;
 
 public class CatAnimation : MonoBehaviour
 {
     private Animator animator;
     private PlayerController playerController;
+    bool ready = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,36 +23,53 @@ public class CatAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator = GetComponent<CharacterSelector>().GetCurrentMesh().GetComponent<Animator>();
         if(animator != null && animator.GetBool("IsDashing"))
         {
-            OnDashStop();
+            if(!animator.IsInTransition(0))
+            {
+                print(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            }
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f &&
+                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.8f &&
+                    !animator.IsInTransition(0))
+            {
+                OnDashStop();
+            }
         }
     }
-
+    void ToggleAnimparam(string paramName, bool paramValue)
+    {
+        if(GetComponent<PlayerController>().gameplayControlsEnabled)
+        {
+            animator = GetComponent<CharacterSelector>().GetCurrentMesh().GetComponent<Animator>();
+            animator?.SetBool(paramName, paramValue);
+        }
+    }
     void OnMove()
     {
-        animator?.SetBool("IsMoving", true);
+        ToggleAnimparam("IsMoving", true);
     }
     void OnStop()
     {
-        animator?.SetBool("IsMoving", false);
+        ToggleAnimparam("IsMoving", false);
     }
 
     void OnJump()
     {
-        animator?.SetBool("IsJumping", true);
+        ToggleAnimparam("IsJumping", true);
     }
     void OnDash()
     {
-        animator?.SetBool("IsDashing", true);
+        print("DASH");
+        ToggleAnimparam("IsDashing", true);
     }
     void OnJumpStop()
     {
-        animator?.SetBool("IsJumping", false);
+        ToggleAnimparam("IsJumping", false);
     }
     void OnDashStop()
     {
-        animator?.SetBool("IsDashing", false);
+        print("DASHSTOP");
+        ToggleAnimparam("IsDashing", false);
     }
 }
