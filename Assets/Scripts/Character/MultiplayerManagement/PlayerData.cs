@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using LocalCoop;
 
@@ -85,9 +86,9 @@ public class PlayerData
     }
     public void TeleportAtMenuPosition()
     {
-        float xSpawnPosition = -11+controllerID*2.5f; //-11 is left offset and 2.5 is the space between each cat
+        float xSpawnPosition = -22+controllerID*5.0f; //-11 is left offset and 2.5 is the space between each cat
         Vector3 cameraPos = Camera.main.transform.position;
-        Vector3 menuSpawnPos = new Vector3 (xSpawnPosition,0,0);
+        Vector3 menuSpawnPos = new Vector3 (xSpawnPosition,0,10);
         cameraPos.y -= 10;
         Vector3 lookAtDir = cameraPos - menuSpawnPos;
         Quaternion menuSpawnRotation = Quaternion.LookRotation(lookAtDir, Vector3.up);
@@ -111,9 +112,11 @@ public class PlayerData
     public void ToggleReadyImage(bool isEnabled)
     {
         GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
+        
         if(readyImage != null)
         {
             readyImage.SetActive(isEnabled);
+            readyImage.GetComponent<Image>().color = GetCatColor();
         }
     }
     public void ReleaseDPad()
