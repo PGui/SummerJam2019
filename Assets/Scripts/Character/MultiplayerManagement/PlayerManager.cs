@@ -37,6 +37,7 @@ namespace LocalCoop {
         private int displayedCountdown = 0;
 
         public static PlayerManager singleton = null;
+      
 
         // Sounds
         AudioSource audioSource;
@@ -224,8 +225,9 @@ namespace LocalCoop {
 
         void UpdateCountDown(string message)
         {
+            UICountDown.GetComponent<Animator>().SetTrigger("PlayBump");
             UICountDown.GetComponent<Text>().text = message;
-            //play FX ?
+            
         }
 
         int GetControllerAmount() {
