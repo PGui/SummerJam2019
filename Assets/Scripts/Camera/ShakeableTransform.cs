@@ -14,14 +14,14 @@ public class ShakeableTransform : MonoBehaviour
     /// during shaking.
     /// </summary>
     [SerializeField]
-    Vector3 maximumAngularShake = Vector3.one * 15;
+    public Vector3 maximumAngularShake = Vector3.one * 15;
 
     /// <summary>
     /// Frequency of the Perlin noise function. Higher values
     /// will result in faster shaking.
     /// </summary>
     [SerializeField]
-    float frequency = 25;
+    public float frequency = 25;
 
     /// <summary>
     /// <see cref="trauma"/> is taken to this power before
@@ -29,13 +29,13 @@ public class ShakeableTransform : MonoBehaviour
     /// falloff as trauma reduces.
     /// </summary>
     [SerializeField]
-    float traumaExponent = 1;
+    public float traumaExponent = 1;
 
     /// <summary>
     /// Amount of trauma per second that is recovered.
     /// </summary>
     [SerializeField]
-    float recoverySpeed = 1;
+    public float recoverySpeed = 1;
 
     /// <summary>
     /// Value between 0 and 1 defining the current amount
@@ -82,5 +82,13 @@ public class ShakeableTransform : MonoBehaviour
     public void InduceStress(float stress)
     {
         trauma = Mathf.Clamp01(trauma + stress);
+    }
+
+    public void ResetToDefault()
+    {
+        maximumAngularShake = new Vector3(25,25,25);
+        traumaExponent = 1;
+        recoverySpeed = 1;
+        frequency = 20;
     }
 }

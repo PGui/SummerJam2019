@@ -38,7 +38,11 @@ public class BumperZone : MonoBehaviour
 
             audioSource.PlayOneShot(jumperZoneClips[Random.Range(0, jumperZoneClips.Length)]);
 
-            cameraShake?.InduceStress(0.05f);
+            cameraShake.ResetToDefault();
+            // cameraShake.recoverySpeed = 0.1f;
+            cameraShake.frequency = 25.0f;
+            cameraShake.traumaExponent = 0.8f;
+            cameraShake?.InduceStress(0.01f);
         }
     }
 

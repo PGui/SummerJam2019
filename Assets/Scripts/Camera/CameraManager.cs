@@ -28,7 +28,6 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(Players);
     }
 
     // Update is called once per frame

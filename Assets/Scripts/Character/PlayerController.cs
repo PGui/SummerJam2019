@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float airSpeed = 5.0f;
     public float movementDamping = 0.1f;
     public float gravityMultiplier = 2.0f;
+    public float stopDurationWhenCatched = 2.0f;
     public OnMoveDelegate OnMove;
     public OnStopDelegate OnStop;
 
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
     private float lastTimeGrounded = 0.0f;
     private bool wasGrounded = false;
+    private bool beingCatched = false;
 
     // Internals jump
     private bool isJumping = false;
@@ -74,11 +76,16 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         moveDirection = Vector3.zero;
 
+        this.GetComponentInChildren<CatCollider>().DelegateChaser += OnCatCatched;
+
         StartCoroutine(CheckGrounded(controller));
     }
     // Update is called once per frame
     void Update()
     {
+        if (beingCatched)
+            return;
+
         if(!debugMode && !gameplayControlsEnabled)
             return;
 
@@ -160,6 +167,20 @@ public class PlayerController : MonoBehaviour
         }
 
         return Speed;
+    }
+
+    void OnCatCatched(GameObject cat)
+    {
+        StartCoroutine(StopInputCoroutine(this.gameObject, cat, stopDurationWhenCatched));
+    }
+
+    IEnumerator StopInputCoroutine(GameObject cat1, GameObject cat2, float delay)
+    {
+        cat1.GetComponent<PlayerController>().beingCatched = true;
+        cat2.GetComponent<PlayerController>().beingCatched = true;
+        yield return new WaitForSeconds(delay);
+        cat1.GetComponent<PlayerController>().beingCatched = false;
+        cat2.GetComponent<PlayerController>().beingCatched = false;
     }
 
     IEnumerator CheckGrounded(CharacterController controller)

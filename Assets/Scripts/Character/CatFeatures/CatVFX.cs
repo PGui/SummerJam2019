@@ -7,6 +7,8 @@ public class CatVFX : MonoBehaviour
     private PlayerController playerController;
     public ParticleSystem walkVFX;
     public ParticleSystem fightVFX;
+
+    ShakeableTransform cameraShake;
     
     // Start is called before the first frame update
     void Start()
@@ -15,6 +17,9 @@ public class CatVFX : MonoBehaviour
         playerController.OnMove += OnMove;
         playerController.OnStop += OnStop;
         this.GetComponentInChildren<CatCollider>().DelegateChaser += StartFightVFX;
+
+        GameObject shakeGameobject = GameObject.FindGameObjectWithTag("CameraShake");
+        cameraShake = shakeGameobject?.GetComponent<ShakeableTransform>();
     }
 
     // Update is called once per frame
@@ -52,6 +57,13 @@ public class CatVFX : MonoBehaviour
         if (fightVFX != null && !fightVFX.isPlaying)
         {
             fightVFX.Play();
+            cameraShake.ResetToDefault();
+            cameraShake.maximumAngularShake = new Vector3(15,15,15);
+            cameraShake.recoverySpeed = 0.3f;
+            cameraShake.frequency = 5.0f;
+            cameraShake.traumaExponent = 1.53f;
+            cameraShake.InduceStress(0.3f);
+            
         }
     }
 }
