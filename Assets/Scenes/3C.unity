@@ -2747,7 +2747,7 @@ PrefabInstance:
     - target: {fileID: 6303306630583121381, guid: 10f315d5761f27948af9bdf1cd830188,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.05
+      value: 18.46
       objectReference: {fileID: 0}
     - target: {fileID: 6303306630583121381, guid: 10f315d5761f27948af9bdf1cd830188,
         type: 3}
@@ -2801,7 +2801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 833789282, guid: 10f315d5761f27948af9bdf1cd830188, type: 3}
       propertyPath: currentState
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2499739106279750545, guid: 10f315d5761f27948af9bdf1cd830188,
         type: 3}
@@ -15541,13 +15541,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6303306630583121382, guid: 10f315d5761f27948af9bdf1cd830188,
-        type: 3}
-      propertyPath: debugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 175501316, guid: 10f315d5761f27948af9bdf1cd830188, type: 3}
-      propertyPath: playOnAwake
+    - target: {fileID: 833789282, guid: 10f315d5761f27948af9bdf1cd830188, type: 3}
+      propertyPath: currentState
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2499739106279750545, guid: 10f315d5761f27948af9bdf1cd830188,

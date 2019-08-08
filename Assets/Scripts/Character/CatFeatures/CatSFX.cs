@@ -12,6 +12,8 @@ public class CatSFX : MonoBehaviour
 
     public AudioClip[] angrySounds;
 
+    public AudioClip[] catSounds;
+
     public AudioClip jumpSound;
     public AudioClip dashSound;
 
@@ -55,8 +57,24 @@ public class CatSFX : MonoBehaviour
     {
         if (!angryAudioSource.isPlaying && angrySounds.Length > 0)
         {
-            //print(Random.Range(0, walkSounds.Length));
             angryAudioSource.PlayOneShot(angrySounds[Random.Range(0, angrySounds.Length)]);
+        }
+    }
+
+    public void PlayReadySound()
+    {
+        if (catSounds.Length > 0)
+        {
+            float previousVolume = audioSource.volume;
+            float previousMinDistance = audioSource.minDistance;
+            float previousMaxDistance = audioSource.maxDistance;
+            audioSource.minDistance = 990.0f;
+            audioSource.maxDistance = 1000.0f;
+            audioSource.volume = 1.0f;
+            audioSource.PlayOneShot(catSounds[Random.Range(0, catSounds.Length)]);
+            audioSource.volume = previousVolume;
+            audioSource.minDistance = previousMinDistance;
+            audioSource.maxDistance = previousMaxDistance;
         }
     }
 

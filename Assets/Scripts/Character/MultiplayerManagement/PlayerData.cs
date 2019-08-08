@@ -72,6 +72,7 @@ public class PlayerData
     {
         ToggleReadyImage(true);
         isReady = true;
+        playerGameObject.GetComponent<CatSFX>().PlayReadySound();
     }
     public void DeReady()
     {

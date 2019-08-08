@@ -126,6 +126,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5b4dd31101816c749bbbbbce4702e84d, type: 3}
   - {fileID: 8300000, guid: e1af56bc11c650d40babde463a2ce484, type: 3}
   - {fileID: 8300000, guid: 23b25b1d35eca3f4eb63671fb6ff6b38, type: 3}
+  - {fileID: 8300000, guid: 3722200ea964de44bb7b3871791abb93, type: 3}
+  - {fileID: 8300000, guid: 5ebf7d3957961e14ba250e1872ba5667, type: 3}
   jumpMultiplier: 1.5
 --- !u!82 &621472068
 AudioSource:
