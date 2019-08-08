@@ -125,4 +125,20 @@ public class CharacterSelector : MonoBehaviour
             chasedMesh = coloredMeshes[colorID].chasedMesh;
         }
     }
+    public GameObject GetCurrentMesh()
+    {
+        CatState catState = this.GetComponent<CatState>();
+        if(catState != null && chaserMesh != null && chasedMesh != null)
+        {
+            if(catState.currentState == eCatState.CHASER)
+            {
+                return chaserMesh;
+            }
+            else
+            {
+                return chasedMesh;
+            }
+        }
+        return null;
+    }
 }

@@ -5,6 +5,8 @@ using LocalCoop;
 
 public delegate void OnDashDelegate();
 public delegate void OnJumpDelegate();
+public delegate void OnDashStopDelegate();
+public delegate void OnJumpStopDelegate();
 public delegate void OnMoveDelegate();
 public delegate void OnStopDelegate();
 
@@ -32,11 +34,13 @@ public class PlayerController : MonoBehaviour
     public float maxJumpHeight = 5.0f;
     public float jumpFall = 0.15f;
     public OnJumpDelegate OnJump;
+    public OnJumpStopDelegate OnJumpStop;
 
     [Header("Dash")]
     public float dashDistance = 10;
     public Vector3 drag = new Vector3(2.0f, 2.0f, 2.0f);
     public OnDashDelegate OnDash;
+    public OnDashStopDelegate OnDashStop;
     public const float maxDashTime = 1.0f;
     [Header("Out of Arena Bump")]
     
@@ -71,6 +75,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics.IgnoreLayerCollision(8,9);
+        Physics.IgnoreLayerCollision(9,10);
         controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         moveDirection = Vector3.zero;
@@ -91,6 +97,11 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(Input.GetAxis(GetHorizonalInputString()), 0, Input.GetAxis(GetVerticalInputString()));
         if (move != Vector3.zero)
         {
+            CatTailWind[] catTailWinds = GetComponentsInChildren<CatTailWind>();
+            foreach(CatTailWind tail in catTailWinds)
+            {
+                tail.SendForce(move);
+            }
             OnMove();
             transform.forward = move;
         }
@@ -145,7 +156,10 @@ public class PlayerController : MonoBehaviour
         currentDashTime += Time.deltaTime;
 
         if(currentDashTime >= maxCaptureTime)
+        {
             canCapture = false;
+            OnDashStop();
+        }
         
 
            
@@ -198,7 +212,10 @@ public class PlayerController : MonoBehaviour
             if (controller.isGrounded && !wasGrounded)
             {
                 if (isJumping)
+                {
                     isJumping = false;
+                    OnJumpStop();
+                }
             }
 
             if (!isJumping && !controller.isGrounded)
