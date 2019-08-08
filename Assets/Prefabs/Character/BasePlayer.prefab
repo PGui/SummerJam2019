@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 6303306630583121376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4662344, y: 2.69285, z: -3.89}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4286075748288031807}
   - {fileID: 5527953702496907088}
@@ -338,7 +338,7 @@ MonoBehaviour:
   debugMode: 0
   playerControllerID: 1
   gameplayControlsEnabled: 0
-  groundSpeed: 15
+  groundSpeed: 20
   airSpeed: 3
   movementDamping: 0.1
   gravityMultiplier: 5
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bffadceedb28974ab00d753c3789177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.5
+  speedMultiplier: 1.25
   energyCountdown: 0
 --- !u!1 &6473270998763512722
 GameObject:
@@ -1102,11 +1102,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: 1795075839250223354, guid: 85265ccb2468b504c8ce740cfa3164e7,
-        type: 3}
-      propertyPath: m_Name
-      value: WalkVFX
-      objectReference: {fileID: 0}
     - target: {fileID: 1795075839250223356, guid: 85265ccb2468b504c8ce740cfa3164e7,
         type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -1171,6 +1166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795075839250223354, guid: 85265ccb2468b504c8ce740cfa3164e7,
+        type: 3}
+      propertyPath: m_Name
+      value: WalkVFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85265ccb2468b504c8ce740cfa3164e7, type: 3}
@@ -2050,16 +2050,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_cat1E_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 91934bce47a04ae4189f1ae535b5dda6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2113,6 +2103,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 91934bce47a04ae4189f1ae535b5dda6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_cat1E_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91934bce47a04ae4189f1ae535b5dda6,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2304,16 +2304,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatH_mesh 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: fbef74e0cf9be2145a11610c35bac17e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2369,6 +2359,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatH_mesh 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fbef74e0cf9be2145a11610c35bac17e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbef74e0cf9be2145a11610c35bac17e, type: 3}
 --- !u!1 &4079211298157203947 stripped
@@ -2390,16 +2390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_cat1C_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 28c8c4762535d0c47b4406033b958902,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2453,6 +2443,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 28c8c4762535d0c47b4406033b958902,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_cat1C_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 28c8c4762535d0c47b4406033b958902,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2560,16 +2560,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatC_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f6019f53e2d2a2745b8c378146470e51,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2625,6 +2615,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatC_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f6019f53e2d2a2745b8c378146470e51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6019f53e2d2a2745b8c378146470e51, type: 3}
 --- !u!4 &1300842505563754541 stripped
@@ -2646,16 +2646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303306630583121381}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
-        type: 3}
-      propertyPath: m_Name
-      value: PC_BcatG_mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 69ce3e13470a307479e3bd9bf028a62f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2709,6 +2699,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 69ce3e13470a307479e3bd9bf028a62f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
+        type: 3}
+      propertyPath: m_Name
+      value: PC_BcatG_mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 69ce3e13470a307479e3bd9bf028a62f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

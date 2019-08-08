@@ -825,13 +825,15 @@ GameObject:
   - component: {fileID: 1764934333}
   - component: {fileID: 1764934332}
   - component: {fileID: 1764934331}
+  - component: {fileID: 1764934334}
+  - component: {fileID: 1764934336}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1764934331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,6 +895,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &1764934334
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764934330}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b0486b340b7cc6645af22218e2de7c87, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b0486b340b7cc6645af22218e2de7c87, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &1764934336
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764934330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd07b1ff21d44524bb7c3458e939ff7a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1828949020
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,5 +982,9 @@ MonoBehaviour:
   UICharacterSelection: {fileID: 435576852}
   UIVictoryScreen: {fileID: 142459955}
   UICountDown: {fileID: 1764934330}
-  startCountdown: 3
+  startCountdown: 4
   startMessage: GO !
+  StartSounds:
+  - {fileID: 8300000, guid: c54e71e61e932ad4291c820ad4184f03, type: 3}
+  - {fileID: 8300000, guid: 54a2580da47fbc44d8cd237ad56f895c, type: 3}
+  - {fileID: 8300000, guid: df86da32c2ab62b478427ee5d195ab14, type: 3}

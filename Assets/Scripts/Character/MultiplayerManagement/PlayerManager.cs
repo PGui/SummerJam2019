@@ -37,6 +37,11 @@ namespace LocalCoop {
         private int displayedCountdown = 0;
 
         public static PlayerManager singleton = null;
+      
+
+        // Sounds
+        AudioSource audioSource;
+        public AudioClip[] StartSounds;
 
        
 
@@ -60,6 +65,7 @@ namespace LocalCoop {
         }
 
         void Start() {
+            CreateAudioSource();
             CreatePlayers();
         }
 
@@ -92,10 +98,10 @@ namespace LocalCoop {
                     if(displayedCountdown < previousCountdown)
                     {
                         if(displayedCountdown == 0) {
-                            UpdateCountDown(startMessage);
+                            UpdateCountDown(startMessage, 2);//index for 0/GO  sound
                             InitPlayersAfterLoadLevel();
                         }
-                        else UpdateCountDown(displayedCountdown.ToString());
+                        else UpdateCountDown(displayedCountdown.ToString(), 0);//index for 3 2 1 sounds
                     }
                     
                     if(startCountdown <= 0){
@@ -217,10 +223,12 @@ namespace LocalCoop {
             }
         }
 
-        void UpdateCountDown(string message)
+        void UpdateCountDown(string message, int count)
         {
+            UICountDown.GetComponent<Animator>().SetTrigger("PlayBump");
+            PlayReadySound(count);
             UICountDown.GetComponent<Text>().text = message;
-            //play FX ?
+            
         }
 
         int GetControllerAmount() {
@@ -308,5 +316,17 @@ namespace LocalCoop {
             }
             playerListDyn.Clear();
         }
+
+        void CreateAudioSource()
+        {
+            audioSource = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+        }
+
+        void PlayReadySound(int index)
+        {
+            audioSource.PlayOneShot(StartSounds[index]);
+        }
     }
+
+    
 }
