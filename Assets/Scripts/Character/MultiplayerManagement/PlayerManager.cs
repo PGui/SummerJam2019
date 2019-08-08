@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public enum eCatState
 {
@@ -28,8 +29,16 @@ namespace LocalCoop {
         public string LevelNameToLoad = "Level0";
         public GameObject UICharacterSelection;
         public GameObject UIVictoryScreen;
+        public GameObject UICountDown;
+
+        [Header("CountDown")]
+        public float startCountdown = 3;
+        public string startMessage = "GO !";
+        private int displayedCountdown = 0;
 
         public static PlayerManager singleton = null;
+
+       
 
         public static bool IsMenuScene(Scene scene)
         {
@@ -73,7 +82,25 @@ namespace LocalCoop {
             }
             else
             {
-                if(AllCatsAreChasers())
+
+                if(startCountdown > 0)
+                {
+                    startCountdown -= Time.deltaTime;
+                    int previousCountdown = displayedCountdown;
+                    displayedCountdown = Mathf.RoundToInt(startCountdown);
+
+                    if(displayedCountdown < previousCountdown)
+                    {
+                        if(displayedCountdown == 0) UpdateCountDown(startMessage);
+                        else UpdateCountDown(displayedCountdown.ToString());
+                    }
+                    
+                    if(startCountdown <= 0){
+                        InitPlayersAfterLoadLevel();
+                        UICountDown.SetActive(false);
+                    }
+                }
+                else if(AllCatsAreChasers())
                 {
                     if(!UIVictoryScreen.activeInHierarchy)
                     {
@@ -161,13 +188,22 @@ namespace LocalCoop {
                     print("All players are readyyyy !!"); //Do send player selection to game level Scene scene = SceneManager.GetActiveScene();
                     UICharacterSelection.SetActive(false);
                     LoadLevel(LevelNameToLoad);
-                    InitPlayersAfterLoadLevel();
+                              
+                    //InitPlayersAfterLoadLevel();
                 }
             }
         }
+       
         void LoadLevel(string sceneName) {
             SceneManager.LoadScene(sceneName);
+            SceneManager.sceneLoaded += OnLevelLoaded;
         }
+        
+        void OnLevelLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if(!IsMenuScene(scene))
+                UICountDown.SetActive(true);  
+        }   
         void InitPlayersAfterLoadLevel()
         {
             foreach (PlayerData player in playerListDyn)
@@ -178,6 +214,13 @@ namespace LocalCoop {
                 }
             }
         }
+
+        void UpdateCountDown(string message)
+        {
+            UICountDown.GetComponent<Text>().text = message;
+            //play FX ?
+        }
+
         int GetControllerAmount() {
             return Input.GetJoystickNames().Length;
         }
