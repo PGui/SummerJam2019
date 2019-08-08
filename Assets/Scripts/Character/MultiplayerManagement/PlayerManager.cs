@@ -91,13 +91,15 @@ namespace LocalCoop {
 
                     if(displayedCountdown < previousCountdown)
                     {
-                        if(displayedCountdown == 0) UpdateCountDown(startMessage);
+                        if(displayedCountdown == 0) {
+                            UpdateCountDown(startMessage);
+                            InitPlayersAfterLoadLevel();
+                        }
                         else UpdateCountDown(displayedCountdown.ToString());
                     }
                     
                     if(startCountdown <= 0){
-                        InitPlayersAfterLoadLevel();
-                        UICountDown.SetActive(false);
+                       UICountDown.SetActive(false);
                     }
                 }
                 else if(AllCatsAreChasers())
