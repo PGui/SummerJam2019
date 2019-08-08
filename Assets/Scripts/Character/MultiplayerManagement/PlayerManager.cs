@@ -98,10 +98,10 @@ namespace LocalCoop {
                     if(displayedCountdown < previousCountdown)
                     {
                         if(displayedCountdown == 0) {
-                            UpdateCountDown(startMessage);
+                            UpdateCountDown(startMessage, 2);//index for 0/GO  sound
                             InitPlayersAfterLoadLevel();
                         }
-                        else UpdateCountDown(displayedCountdown.ToString());
+                        else UpdateCountDown(displayedCountdown.ToString(), 0);//index for 3 2 1 sounds
                     }
                     
                     if(startCountdown <= 0){
@@ -223,9 +223,10 @@ namespace LocalCoop {
             }
         }
 
-        void UpdateCountDown(string message)
+        void UpdateCountDown(string message, int count)
         {
             UICountDown.GetComponent<Animator>().SetTrigger("PlayBump");
+            PlayReadySound(count);
             UICountDown.GetComponent<Text>().text = message;
             
         }
