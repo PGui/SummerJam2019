@@ -49,7 +49,8 @@ public class Pickup : MonoBehaviour
     {
         canBePicked = true;
         activePickupCount++;
-          GetComponentInParent<Renderer>().enabled = true;
+        GetComponentInParent<Renderer>().enabled = true;
+        GetComponentInChildren<Light>().enabled = true;
     }
 
     void DeActivate()
@@ -57,6 +58,7 @@ public class Pickup : MonoBehaviour
         canBePicked = false;
         activePickupCount--;
         GetComponentInParent<Renderer>().enabled = false;
+        GetComponentInChildren<Light>().enabled = false;
         if(activePickupCount == 0)
         {
             foreach (Pickup pickup in pickups)
