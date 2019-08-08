@@ -19,6 +19,9 @@ public class Pickup : MonoBehaviour
 
     private float reactivationTimer = 0f;
 
+    [Header("VFX")]
+    public GameObject pickupVfx;
+
     private void Awake()
     {
         pickups.Add(this);
@@ -68,6 +71,11 @@ public class Pickup : MonoBehaviour
         reactivationTimer = 0;
 
         audioSource.PlayOneShot(pickUpClips[Random.Range(0, pickUpClips.Length)]);
+        
+        //Spawn vfx
+        GameObject vfxGameObject = GameObject.Instantiate<GameObject>(pickupVfx,this.transform.position, this.transform.rotation);
+        vfxGameObject.GetComponent<ParticleSystem>().Play();
+        Destroy(vfxGameObject, 3.0f);
     }
     private void OnTriggerEnter(Collider other)
     {

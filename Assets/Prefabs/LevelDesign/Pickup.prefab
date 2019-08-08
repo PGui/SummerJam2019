@@ -113,6 +113,8 @@ MonoBehaviour:
   canBePicked: 1
   reactivateAfterDelay: 0
   reactivationDelay: 5
+  pickupVfx: {fileID: 3026264938322050350, guid: b9aa9e67f003dd147b70a737f0fa3e11,
+    type: 3}
 --- !u!82 &4460151886095113473
 AudioSource:
   m_ObjectHideFlags: 0
