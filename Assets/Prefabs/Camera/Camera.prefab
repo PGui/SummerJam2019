@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3643595040176801684}
   - component: {fileID: 575220135}
+  - component: {fileID: 2030509789}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -279,3 +280,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!111 &2030509789
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643595040176801687}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3e83a8a6a19bdc3469d07e6d4916d415, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3e83a8a6a19bdc3469d07e6d4916d415, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
