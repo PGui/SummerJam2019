@@ -5,7 +5,7 @@ using UnityEngine;
 public class CatState : MonoBehaviour
 {
 
-    [ReadOnly] public eCatState currentState = eCatState.NONE;
+    /*[ReadOnly]*/ public eCatState currentState = eCatState.NONE;
 
     void Start()
     {
