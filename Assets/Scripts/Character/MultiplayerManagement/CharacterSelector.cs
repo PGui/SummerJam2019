@@ -26,7 +26,7 @@ public class CharacterSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetCurrentColorMeshes(currentColorVariantID);
     }
 
     // Update is called once per frame
