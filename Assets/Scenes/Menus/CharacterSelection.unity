@@ -947,3 +947,8 @@ MonoBehaviour:
   UICountDown: {fileID: 1764934330}
   startCountdown: 3
   startMessage: GO !
+  StartSounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
