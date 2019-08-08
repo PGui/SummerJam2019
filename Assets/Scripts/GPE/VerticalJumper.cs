@@ -5,6 +5,7 @@ using UnityEngine;
 public class VerticalJumper : MonoBehaviour
 {
     public bool forceDirectionToArenaCenter = false;
+    public float verticalMultiplier = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,6 @@ public class VerticalJumper : MonoBehaviour
             return;
 
         GameObject otherEntity = other.transform.gameObject;
-        otherEntity.GetComponent<PlayerController>().TriggerOutOfArenaBump(forceDirectionToArenaCenter);
+        otherEntity.GetComponent<PlayerController>().TriggerOutOfArenaBump(verticalMultiplier, forceDirectionToArenaCenter);
     }
 }

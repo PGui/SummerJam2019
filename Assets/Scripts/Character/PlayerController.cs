@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 magnetPosition = new Vector3(3.0f,20.0f,-8.0f);
     private Vector3 magnetDirection = new Vector3(0.0f,0.0f,0.0f);
     public float magnetFactor = 3.0f;
-    public float outOfArenaJumpMultiplier = 5.0f;
 
     [Header("Capture")]
     public float maxCaptureTime = 2f;
@@ -217,12 +216,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TriggerOutOfArenaBump(bool forceDirectionToArenaCenter)
+    public void TriggerOutOfArenaBump(float verticalMultiplier, bool forceDirectionToArenaCenter)
     {
             lastDirection = transform.forward;
             isJumping = true;
             velocity.y = 0f;
-            velocity.y += Mathf.Sqrt(outOfArenaJumpMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
+            velocity.y += Mathf.Sqrt(verticalMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
             if(forceDirectionToArenaCenter)
             {
                 isMagnet = true;
