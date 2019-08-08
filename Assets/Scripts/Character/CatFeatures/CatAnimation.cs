@@ -36,10 +36,23 @@ public class CatAnimation : MonoBehaviour
                 OnDashStop();
             }
         }
+        if(animator != null && animator.GetBool("IsJumping"))
+        {
+            if(!animator.IsInTransition(0))
+            {
+                print(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            }
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f &&
+                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.8f &&
+                    !animator.IsInTransition(0))
+            {
+                OnJumpStop();
+            }
+        }
     }
     void ToggleAnimparam(string paramName, bool paramValue)
     {
-        if(GetComponent<PlayerController>().gameplayControlsEnabled)
+        if(GetComponent<PlayerController>().gameplayControlsEnabled || GetComponent<PlayerController>().debugMode)
         {
             animator = GetComponent<CharacterSelector>().GetCurrentMesh().GetComponent<Animator>();
             animator?.SetBool(paramName, paramValue);

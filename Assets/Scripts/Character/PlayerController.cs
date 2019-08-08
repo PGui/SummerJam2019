@@ -240,6 +240,7 @@ public class PlayerController : MonoBehaviour
     {
             lastDirection = transform.forward;
             isJumping = true;
+            OnJump();
             velocity.y = 0f;
             velocity.y += Mathf.Sqrt(verticalMultiplier*maxJumpHeight * jumpMultiplier * Physics.gravity.y);
             if(forceDirectionToArenaCenter)
