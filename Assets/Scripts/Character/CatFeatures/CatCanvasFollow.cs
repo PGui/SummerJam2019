@@ -11,13 +11,15 @@ public class CatCanvasFollow : MonoBehaviour
     public Text playerName;
     public Text countdown;
     public Text score;
-    public string playersName = "Cat";
     public GameObject header;
+    public Vector3 offset = new Vector3(0,15,0);
+    [Header("Player Name")]
+    public string playersName = "Cat";
+    public float hideNameCountdown = 10;
+   
     private GameObject player;
     private CatEnergy catEnergy;
-    public Vector3 offset = new Vector3(0,20,0);
-    
-  
+    private Scene currentScene;
       // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class CatCanvasFollow : MonoBehaviour
         player.GetComponentInChildren<CatCollider>().DelegateChaser += OnBecameChaser;
         SceneManager.sceneLoaded += OnSceneLoaded;
         catEnergy = player.GetComponent<CatEnergy>();
+
+        countdown.gameObject.SetActive(false);
         //playerName = header.transform.Find("Name").GetComponent<Text>();
        //countdown = header.transform.Find("Countdown").GetComponent<Text>();
          //score = header.transform.Find("Score").GetComponent<Text>();           
@@ -41,6 +45,8 @@ public class CatCanvasFollow : MonoBehaviour
             {
                 score.gameObject.SetActive(true);
             }
+      
+
         }
         else
         {
@@ -66,10 +72,12 @@ public class CatCanvasFollow : MonoBehaviour
             float count = Mathf.Round( catEnergy.energyCountdown * 100f) / 100f;
             countdown.text = count.ToString();
         }
-        if(score != null)
-        {
 
+        if(hideNameCountdown > 0 && currentScene != null && !PlayerManager.IsMenuScene(currentScene))
+        {
+            hideNameCountdown -= Time.deltaTime;
+            if(hideNameCountdown <= 0) playerName.gameObject.SetActive(false);
         }
-            
+                  
     }
 }
