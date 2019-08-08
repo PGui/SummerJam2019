@@ -9065,7 +9065,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh89158
+  m_Name: pb_Mesh65292
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13186,6 +13186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458475621}
   - component: {fileID: 1458475620}
+  - component: {fileID: 1458475622}
   m_Layer: 0
   m_Name: T_FondEtoile
   m_TagString: Untagged
@@ -13210,7 +13211,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 24eab0eb31c6e8d41bcad346a903489c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13250,12 +13251,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458475619}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 76, z: 68}
+  m_LocalPosition: {x: -0, y: 127.1, z: 68}
   m_LocalScale: {x: 1.6461, y: 1.6461, z: 1.6461}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!111 &1458475622
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458475619}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 13fbb4dd734074f47973e838a9034f29, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 13fbb4dd734074f47973e838a9034f29, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!43 &1460952488
 Mesh:
   m_ObjectHideFlags: 0
