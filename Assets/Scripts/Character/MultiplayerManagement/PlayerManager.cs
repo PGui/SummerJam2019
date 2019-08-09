@@ -23,6 +23,7 @@ namespace LocalCoop {
         public static string K_VERTICAL = "Vertical_P";
         public static string K_JUMP = "Jump_P";
         public static string K_DASH = "Dash_P";        
+        public static string K_EMOTE = "Emote_P";        
         public GameObject CharacterSelectionUIPrefab;
         public GameObject PlayerPrefab;
         public List<PlayerData> playerListDyn;

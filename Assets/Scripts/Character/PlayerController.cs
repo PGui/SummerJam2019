@@ -164,9 +164,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-
-           
-
+        if (Input.GetButton(GetEmoteInputString()))
+        {
+            GetComponentInChildren<CatCanvasFollow>().TriggerEmote();
+        }
     }
 
     float GetSpeedToApply(Vector3 axisDirection)
@@ -265,5 +266,9 @@ public class PlayerController : MonoBehaviour
     string GetDashInputString()
     {
         return PlayerManager.K_DASH+playerControllerID;
+    }
+    string GetEmoteInputString()
+    {
+        return PlayerManager.K_EMOTE+playerControllerID;
     }
 }

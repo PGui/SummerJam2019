@@ -12,6 +12,7 @@ public class CatCanvasFollow : MonoBehaviour
     public Text countdown;
     public Text score;
     public GameObject header;
+    public GameObject readyImage;
     public Vector3 offset = new Vector3(0,15,0);
     [Header("Player Name")]
     public string playersName = "Cat";
@@ -76,8 +77,22 @@ public class CatCanvasFollow : MonoBehaviour
         if(hideNameCountdown > 0 && currentScene != null && !PlayerManager.IsMenuScene(currentScene))
         {
             hideNameCountdown -= Time.deltaTime;
-            if(hideNameCountdown <= 0) playerName.gameObject.SetActive(false);
+            if(hideNameCountdown <= 0) 
+            {
+                playerName.gameObject.SetActive(false);
+                DisplayReadyImage(readyImage.GetComponent<Image>().color, false);
+            }
         }
                   
+    }
+    public void DisplayReadyImage(Color color, bool active)
+    {
+        readyImage.SetActive(active);
+        readyImage.GetComponent<Image>().color = color;
+    }
+    public void TriggerEmote()
+    {
+        hideNameCountdown = 0.25f;
+        DisplayReadyImage(readyImage.GetComponent<Image>().color, true);
     }
 }

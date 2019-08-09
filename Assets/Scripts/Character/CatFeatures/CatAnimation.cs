@@ -38,10 +38,6 @@ public class CatAnimation : MonoBehaviour
         }
         if(animator != null && animator.GetBool("IsJumping"))
         {
-            if(!animator.IsInTransition(0))
-            {
-                print(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            }
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f &&
                     animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.8f &&
                     !animator.IsInTransition(0))

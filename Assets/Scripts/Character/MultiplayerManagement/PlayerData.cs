@@ -41,7 +41,7 @@ public class PlayerData
     {
         if (!PlayerManager.IsMenuScene(scene))
         {
-          //  ToggleReadyImage(false);
+            //ToggleReadyImage(false);
             if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
             {
                 playerGameObject.SetActive(false);
@@ -50,6 +50,7 @@ public class PlayerData
         }
         else
         {
+            ToggleReadyImage(false);
             if(playerGameObject.GetComponent<CatState>().currentState == eCatState.NONE)
             {
                 playerGameObject.SetActive(true);
@@ -111,13 +112,7 @@ public class PlayerData
     }
     public void ToggleReadyImage(bool isEnabled)
     {
-        GameObject readyImage = playerGameObject.transform.Find("Canvas").transform.Find("Header").transform.Find("Ready").gameObject;
-        
-        if(readyImage != null)
-        {
-            readyImage.SetActive(isEnabled);
-            readyImage.GetComponent<Image>().color = GetCatColor();
-        }
+        playerGameObject.GetComponentInChildren<CatCanvasFollow>().DisplayReadyImage(GetCatColor(), isEnabled);
     }
     public void ReleaseDPad()
     {
