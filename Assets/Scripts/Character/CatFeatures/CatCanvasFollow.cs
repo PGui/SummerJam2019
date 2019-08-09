@@ -60,10 +60,9 @@ public class CatCanvasFollow : MonoBehaviour
         score.gameObject.SetActive(true);
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 uiPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-        header.transform.position = uiPosition + offset;
+        header.transform.LookAt(Camera.main.transform);
 
         playerName.color = player.GetComponent<CharacterSelector>().GetCatColor();
 
