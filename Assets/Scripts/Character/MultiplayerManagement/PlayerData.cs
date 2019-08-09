@@ -103,7 +103,7 @@ public class PlayerData
         if(spawner != null && playerGameObject != null)
         {
             playerGameObject.transform.position = spawner.transform.position;
-            playerGameObject.transform.rotation = Quaternion.identity;
+            playerGameObject.transform.rotation = spawner.transform.rotation;
         }
     }
     public void ToggleGameplayControls(bool isEnabled)
