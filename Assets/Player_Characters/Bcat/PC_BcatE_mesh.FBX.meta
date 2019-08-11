@@ -115,7 +115,7 @@ ModelImporter:
       name: jump
       takeName: Take 001
       internalID: -2993534804863918692
-      firstFrame: 80
+      firstFrame: 81
       lastFrame: 95
       wrapMode: 0
       orientationOffsetY: 0
@@ -144,7 +144,7 @@ ModelImporter:
       name: dash
       takeName: Take 001
       internalID: -851199388697429409
-      firstFrame: 100
+      firstFrame: 101
       lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
