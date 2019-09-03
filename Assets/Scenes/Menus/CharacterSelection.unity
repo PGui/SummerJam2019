@@ -3067,7 +3067,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Hi Players!\n\nPlease press the A or \u25A1 button for: \n1- Select your
+  m_Text: "Hi Players!\n\nPlease press the A or Square button for: \n1- Select your
     cat\n2- Set as ready\n\n(Use the DPad to change your color and type)\n"
 --- !u!222 &435576855
 CanvasRenderer:
