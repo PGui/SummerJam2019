@@ -2535,9 +2535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'FINISH !
-
-'
+  m_Text: It's OVER!
 --- !u!222 &142459958
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3069,8 +3067,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Hi Players connected !\nPlease A button twice (DPad to change color and
-    type): \n1- activate Player\n2- set as ready\n\n\n"
+  m_Text: "Hi Players!\n\nPlease press the A or \u25A1 button for: \n1- Select your
+    cat\n2- Set as ready\n\n(Use the DPad to change your color and type)\n"
 --- !u!222 &435576855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6936,7 +6934,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9814
+  m_Name: pb_Mesh46184
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
