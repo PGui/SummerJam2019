@@ -2450,7 +2450,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press Start To Reset
+  m_Text: 'Press Start to restart!
 
 
 '
@@ -6934,7 +6934,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46184
+  m_Name: pb_Mesh28998
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7907,7 +7907,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057200862}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47d7bacf0f2cacc469555b131370bd55, type: 3}
